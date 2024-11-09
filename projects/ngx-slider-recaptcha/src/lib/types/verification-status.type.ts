@@ -1,0 +1,1 @@
+export type VerificationStatus = "success" | "fail" | "none";
