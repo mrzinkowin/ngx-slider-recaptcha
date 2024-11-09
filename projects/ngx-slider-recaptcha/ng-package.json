@@ -1,10 +1,18 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/ngx-slider-recaptcha",
+  "deleteDestPath": true,
   "lib": {
-    "entryFile": "src/public-api.ts"
+    "entryFile": "src/public-api.ts",
+    "styleIncludePaths": [
+      "src"
+    ]
   },
   "assets": [
-    "src/assets/**/*"
+    {
+      "glob": "**/*",
+      "input": "src/assets/images",
+      "output": "assets/images"
+    }
   ]
 }

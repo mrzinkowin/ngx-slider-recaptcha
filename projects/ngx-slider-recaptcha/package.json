@@ -1,6 +1,9 @@
 {
   "name": "ngx-slider-recaptcha",
   "version": "1.0.0",
+  "scripts": {
+    "build:lib": "ng build --configuration production"
+  },
   "peerDependencies": {
     "@angular/common": "^14.1.0",
     "@angular/core": "^14.1.0"
