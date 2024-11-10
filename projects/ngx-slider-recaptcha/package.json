@@ -1,9 +1,24 @@
 {
   "name": "ngx-slider-recaptcha",
   "version": "1.0.0",
-  "scripts": {
-    "build:lib": "ng build --configuration production"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrzinkowin/ngx-slider-recaptcha"
   },
+  "author": {
+    "name": "Zin Ko Win",
+    "email": "zinkowin.developer@gmail.com"
+  },
+  "keywords": [
+    "angular",
+    "slider",
+    "captcha",
+    "recaptcha"
+  ],
+  "bugs": {
+    "url": "https://github.com/mrzinkowin/ngx-slider-recaptcha/issues"
+  },
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^14.1.0",
     "@angular/core": "^14.1.0"
