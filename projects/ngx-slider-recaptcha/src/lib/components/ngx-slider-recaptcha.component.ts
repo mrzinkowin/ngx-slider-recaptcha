@@ -26,8 +26,9 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
   @Output() onError = new EventEmitter();
 
   private _sliderText: string | undefined = '';
-  private _sliderLeftPosition: string | number = '';
-  private _maskWidth: string | number = '';
+  private _sliderLeftPosition: number = 0;
+  private _blockLeftPosition: number = 0;
+  private _maskWidth: number = 0;
   private _isSliderDragging = false;
   private _verificationStatus: VerificationStatus = 'none';
   private _config: NgxSliderRecaptchaConfig = { ...DEFAULT_SLIDER_RECAPTCHA_CONFIG };
@@ -58,7 +59,7 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['sliderRecaptchaConfig']?.currentValue) {
-      this._config = { ...this.globalConfig, ...this.sliderRecaptchaConfig };
+      this._config = { ...this._config, ...this.globalConfig, ...this.sliderRecaptchaConfig };
       this.cdr.detectChanges()
     }
   }
@@ -106,6 +107,10 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
     return this._sliderLeftPosition;
   }
 
+  get blockLeftPosition() {
+    return this._blockLeftPosition;
+  }
+
   get config() {
     return this._config;
   }
@@ -132,10 +137,9 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
     let moveY: number = y - this.dragStartY;
     if (moveX < 0 || moveX + 40 > this.config.width!) return;
 
-    this._sliderLeftPosition = (moveX - 1) + 'px';
-    this._maskWidth = (moveX + 4) + 'px';
-    var blockLeft = (this.config.width! - 40 - 20) / (this.config.width! - 40) * moveX;
-    this.renderer.setStyle(this.block.nativeElement, 'left', `${blockLeft}px`);
+    this._sliderLeftPosition = (moveX - 1);
+    this._maskWidth = (moveX + 4);
+    this._blockLeftPosition = (this.config.width! - 40 - 20) / (this.config.width! - 40) * moveX;
     this.trail.push(Math.round(moveY));
   }
 
