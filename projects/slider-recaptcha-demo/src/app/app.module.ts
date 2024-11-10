@@ -12,7 +12,7 @@ import { NgxSliderRecaptchaModule } from 'projects/ngx-slider-recaptcha/src/publ
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgxSliderRecaptchaModule.forRoot()
+    NgxSliderRecaptchaModule
   ],
   providers: [],
   bootstrap: [AppComponent]

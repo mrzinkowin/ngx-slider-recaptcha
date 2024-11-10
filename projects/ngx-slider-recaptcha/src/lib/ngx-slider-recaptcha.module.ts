@@ -18,6 +18,20 @@ import { DEFAULT_SLIDER_RECAPTCHA_CONFIG } from './config/default-ngx-slider-rec
   ],
   exports: [
     NgxSliderRecaptchaComponent
+  ],
+  providers: [
+    {
+      provide: NGX_SLIDER_RECAPTCHA_CONFIG_TOKEN,
+      useValue: DEFAULT_SLIDER_RECAPTCHA_CONFIG
+    },
+    {
+      provide: NGX_SLIDER_RECAPTCHA_VERIFIER_TOKEN,
+      useClass: DefaultNgxSliderRecaptchaVerifier
+    },
+    {
+      provide: NGX_SLIDER_IMAGE_RETRIEVER_TOKEN,
+      useClass: DefaultNgxSliderImageRetriever
+    }
   ]
 })
 export class NgxSliderRecaptchaModule {

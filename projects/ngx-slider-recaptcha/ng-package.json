@@ -9,6 +9,8 @@
     ]
   },
   "assets": [
+    "README.md",
+    "CHANGELOG.md",
     {
       "glob": "**/*",
       "input": "src/assets/images",
