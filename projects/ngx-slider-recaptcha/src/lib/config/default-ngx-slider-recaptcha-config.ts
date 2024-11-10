@@ -11,4 +11,5 @@ export const DEFAULT_SLIDER_RECAPTCHA_CONFIG: NgxSliderRecaptchaConfig = {
     instructionText: 'Slide to complete the puzzle',
     refreshIcon: 'fa fa-repeat',
     maxRetryAttempts: 3,
+    allowRefresh: false
 };

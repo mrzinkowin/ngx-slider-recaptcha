@@ -9,4 +9,5 @@ export interface NgxSliderRecaptchaConfig {
     instructionText?: string;
     refreshIcon?: string;
     maxRetryAttempts?: number;
+    allowRefresh?: boolean;
 }

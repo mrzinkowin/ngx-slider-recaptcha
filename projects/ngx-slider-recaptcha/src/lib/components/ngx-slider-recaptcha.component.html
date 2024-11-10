@@ -12,5 +12,5 @@
         </div>
         <span class="slider-text">{{ sliderText }}</span>
     </div>
-    <i class="refresh-icon" [class]="config.refreshIcon" (click)="refresh()"></i>
+    <i *ngIf="config.allowRefresh" class="refresh-icon" [class]="config.refreshIcon" (click)="refresh()"></i>
 </div>

@@ -56,7 +56,12 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/slider-recaptcha-demo/src/favicon.ico",
-              "projects/slider-recaptcha-demo/src/assets"
+              "projects/slider-recaptcha-demo/src/assets",
+              {
+                "glob": "**/*",
+                "input": "projects/ngx-slider-recaptcha/src/assets/images",
+                "output": "/assets/images"
+              }
             ],
             "styles": [
               "projects/slider-recaptcha-demo/src/styles.scss"
