@@ -11,9 +11,7 @@ import { DEFAULT_SLIDER_RECAPTCHA_CONFIG } from './config/default-ngx-slider-rec
 
 @NgModule({
   imports: [
-    CommonModule
-  ],
-  declarations: [
+    CommonModule,
     NgxSliderRecaptchaComponent
   ],
   exports: [
@@ -40,8 +38,8 @@ export class NgxSliderRecaptchaModule {
   ): ModuleWithProviders<NgxSliderRecaptchaModule> {
     const {
       config = DEFAULT_SLIDER_RECAPTCHA_CONFIG,
-      verifierClass = DefaultNgxSliderRecaptchaVerifier,
-      imageRetrieverClass = DefaultNgxSliderImageRetriever
+      customVerifier = DefaultNgxSliderRecaptchaVerifier,
+      customImageRetriever = DefaultNgxSliderImageRetriever
     } = options;
     return {
       ngModule: NgxSliderRecaptchaModule,
@@ -52,11 +50,11 @@ export class NgxSliderRecaptchaModule {
         },
         {
           provide: NGX_SLIDER_RECAPTCHA_VERIFIER_TOKEN,
-          useClass: verifierClass || DefaultNgxSliderRecaptchaVerifier
+          useClass: customVerifier || DefaultNgxSliderRecaptchaVerifier
         },
         {
           provide: NGX_SLIDER_IMAGE_RETRIEVER_TOKEN,
-          useClass: imageRetrieverClass || DefaultNgxSliderImageRetriever
+          useClass: customImageRetriever || DefaultNgxSliderImageRetriever
         }
       ]
     };
