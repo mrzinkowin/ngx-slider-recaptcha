@@ -9,11 +9,13 @@ This project adheres to [Semantic Versioning](https://semver.org/) and follows t
 ### Fixed
 - Resolved issue where the refresh icon did not display when using the component in standalone mode due to missing import of `CommonModule`.
 
+---
 ## [1.0.1](https://github.com/mrzinkowin/ngx-slider-recaptcha/releases/tag/v1.0.1) - 2024-11-12
 
 ### Fixed
 - Added missing styles to the library build to ensure consistent appearance across components.
 
+---
 ## [1.0.0](https://github.com/mrzinkowin/ngx-slider-recaptcha/releases/tag/v1.0.0) - 2024-11-11
 
 ### Added
@@ -31,8 +33,5 @@ This project adheres to [Semantic Versioning](https://semver.org/) and follows t
 - **Customization Options**
   - Allowing users to provide custom verifier and image retriever classes for specialized behavior.
   - `NgxSliderRecaptchaOptions` to simplify setting up for global configurations.
-
-### Known Issues
-- [ ] No issues identified for this initial release.
 
 ---
