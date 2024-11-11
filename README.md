@@ -12,6 +12,8 @@
 - [Features](#features)
 - [Demo](#demo)
   - [StackBlitz Demo](#stackblitz-demo)
+    - [Ngx Slider reCAPTCHA Demo](https://stackblitz.com/edit/ngx-slider-recaptcha-demo)
+    - [Ngx Slider reCAPTCHA Custom Demo](https://stackblitz.com/edit/ngx-slider-recaptcha-custom-demo)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Configuration](#configuration)
