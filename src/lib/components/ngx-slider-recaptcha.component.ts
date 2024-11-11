@@ -8,14 +8,16 @@ import { NGX_SLIDER_RECAPTCHA_CONFIG_TOKEN } from '../tokens/slider-recaptcha-co
 import { NgxSliderRecaptchaConfig } from '../config/ngx-slider-recaptcha-config';
 import { DEFAULT_SLIDER_RECAPTCHA_CONFIG } from '../config/default-ngx-slider-recaptcha-config';
 import { VerificationResponse } from '../core/ngx-slider-recaptcha-verification-response';
+import { CommonModule } from '@angular/common';
 
 @Component({
   standalone: true,
   selector: 'ngx-slider-recaptcha',
   templateUrl: './ngx-slider-recaptcha.component.html',
-  styleUrls: ['./ngx-slider-recaptcha.component.scss']
+  styleUrls: ['./ngx-slider-recaptcha.component.scss'],
+  imports: [CommonModule]
 })
-export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterViewInit {
+export class NgxSliderRecaptchaComponent implements OnChanges, AfterViewInit {
   @ViewChild('canvas', { static: true }) private canvas!: ElementRef<HTMLCanvasElement>;
   @ViewChild('block', { static: true }) private block!: ElementRef<HTMLCanvasElement>;
   @ViewChild('slider', { static: true }) private slider!: ElementRef;
@@ -53,14 +55,11 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
     @Inject(NGX_SLIDER_IMAGE_RETRIEVER_TOKEN) private imageRetriever: NgxSliderImageRetriever
   ) { }
 
-
-  ngOnInit(): void {
-    this._config = { ...this.globalConfig, ...this.sliderRecaptchaConfig };
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['sliderRecaptchaConfig']?.currentValue) {
       this._config = { ...this._config, ...this.globalConfig, ...this.sliderRecaptchaConfig };
+      console.log(this.config);
+
       this.cdr.detectChanges()
     }
   }
@@ -178,7 +177,7 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
 
     if (!this.ctx || !this.blockCtx) {
       throw new Error("Failed to initialize canvas contexts");
-    } 
+    }
 
     this.ctx.canvas.width = this.config.width! - 2;
     this.ctx.canvas.height = this.config.height!;
