@@ -1,6 +1,6 @@
 {
   "name": "ngx-slider-recaptcha",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Angular slider with reCAPTCHA verification",
   "license": "MIT",
   "scripts": {
