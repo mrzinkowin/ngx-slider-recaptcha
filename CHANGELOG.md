@@ -4,11 +4,15 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/) and follows the format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
+## [1.0.2](https://github.com/mrzinkowin/ngx-slider-recaptcha/releases/tag/v1.0.2) - 2024-11-12
+
+### Fixed
+- Resolved issue where the refresh icon did not display when using the component in standalone mode due to missing import of `CommonModule`.
+
 ## [1.0.1](https://github.com/mrzinkowin/ngx-slider-recaptcha/releases/tag/v1.0.1) - 2024-11-12
 
 ### Fixed
 - Added missing styles to the library build to ensure consistent appearance across components.
-
 
 ## [1.0.0](https://github.com/mrzinkowin/ngx-slider-recaptcha/releases/tag/v1.0.0) - 2024-11-11
 
