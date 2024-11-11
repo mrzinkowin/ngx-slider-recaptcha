@@ -10,6 +10,7 @@ import { DEFAULT_SLIDER_RECAPTCHA_CONFIG } from '../config/default-ngx-slider-re
 import { VerificationResponse } from '../core/ngx-slider-recaptcha-verification-response';
 
 @Component({
+  standalone: true,
   selector: 'ngx-slider-recaptcha',
   templateUrl: './ngx-slider-recaptcha.component.html',
   styleUrls: ['./ngx-slider-recaptcha.component.scss']
@@ -177,7 +178,10 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
 
     if (!this.ctx || !this.blockCtx) {
       throw new Error("Failed to initialize canvas contexts");
-    }
+    } 
+
+    this.ctx.canvas.width = this.config.width! - 2;
+    this.ctx.canvas.height = this.config.height!;
   }
 
   private initializeCaptcha() {
@@ -186,6 +190,7 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
 
   private renderPuzzle() {
     let img = new Image();
+    img.crossOrigin = 'Anonymous';
     img.onload = () => this.configurePuzzleImage(img);
     img.onerror = () => this.retryImageLoad(img);
     this.fetchImageSource(img);

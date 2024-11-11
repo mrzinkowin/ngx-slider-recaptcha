@@ -36,7 +36,8 @@
 
 ## Demo
 ### StackBlitz Demo
-- [Normal Usage](https://stackblitz.com/edit/ngx-slider-recaptcha-default)
+- [Ngx Slider reCAPTCHA Demo](https://stackblitz.com/edit/ngx-slider-recaptcha-demo)
+- [Ngx Slider reCAPTCHA Custom Demo](https://stackblitz.com/edit/ngx-slider-recaptcha-custom-demo)
 ---
 ## Installation
 
@@ -44,12 +45,6 @@ Install `NgxSliderRecaptcha` using npm:
 
 ```bash
 npm install ngx-slider-recaptcha --save
-```
-
-Install `Font Awesome` using npm:
-
-```bash
-npm install font-awesome --save
 ```
 
 ---
@@ -74,7 +69,7 @@ To start using `NgxSliderRecaptcha`:
 2. **Add** `<ngx-slider-recaptcha></ngx-slider-recaptcha>` in your template:
 
    ```html
-   <ngx-slider-recaptcha (onResolved)="onVerify($event)"></ngx-slider-recaptcha>
+   <ngx-slider-recaptcha (onResolved)="onResolved($event)"></ngx-slider-recaptcha>
    ```
 
 3. **Handle** the verification event in your component:
@@ -91,16 +86,21 @@ To start using `NgxSliderRecaptcha`:
    }
    ```
 
-4. **Update** angular.json for default slider images:
+4. **Update** angular.json for default slider images and icons:
 
-   If you want to use the default slider images, add the following to your angular.json file under the assets section:
-   ```json
-    {
-      "glob": "**/*",
-      "input": "node_modules/ngx-slider-recaptcha/assets/images",
-      "output": "/assets/images"
-    }
-   ```
+    Add the following to your angular.json file under the styles section:
+    ```json
+       "node_modules/ngx-slider-recaptcha/assets/styles/font-awesome.css"
+     ```
+  
+     If you want to use the default slider images, add the following to your angular.json file under the assets section:
+     ```json
+      {
+        "glob": "**/*",
+        "input": "node_modules/ngx-slider-recaptcha/assets/images",
+        "output": "/assets/images"
+      }
+     ```
 ---
 
 ## Configuration
@@ -299,7 +299,7 @@ To use this custom retriever in the module:
 
 ```typescript
 NgxSliderRecaptchaModule.forRoot({
-  imageRetrieverClass: CustomImageRetriever
+  customImageRetriever: CustomImageRetriever
 })
 ```
 
@@ -384,10 +384,16 @@ public class CaptchaController {
 
     @PostMapping("/api/slider-recaptcha/verify")
     public VerificationResponse verify(@RequestBody List<Integer> sliderMovements) {
-        double avg = sliderMovements.stream().mapToInt(Integer::intValue).average().orElse(0);
-        double stddev = Math.sqrt(sliderMovements.stream()
-                .mapToDouble(i -> Math.pow(i - avg, 2))
-                .average().orElse(0));
+        List<Integer> datas = sliderMovements.chars()
+          .filter(Character::isDigit)
+          .mapToObj(c -> Character.getNumericValue(c))
+          .collect(Collectors.toList());
+  
+        double avg = datas.stream().mapToInt(Integer::intValue).average().orElse(0.0);
+        double stddev = datas.stream()
+          .mapToDouble(data -> Math.pow(data - avg, 2))
+          .average()
+          .orElse(0.0);
 
         boolean isVerified = stddev != 0;
 

@@ -9,7 +9,7 @@ import { NgxSliderRecaptchaComponent, NgxSliderRecaptchaConfig, VerificationResp
   imports: [NgxSliderRecaptchaComponent]
 })
 export class AppComponent {
-  title = 'slider-recaptcha-demo';
+  title = 'slider-recaptcha-custom-demo';
   config: NgxSliderRecaptchaConfig = {};
 
   onResolved(response: VerificationResponse): void {
