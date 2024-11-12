@@ -1,4 +1,5 @@
-import { NgxSliderImageRetriever } from "ngx-slider-recaptcha";
+
+import { NgxSliderImageRetriever } from "@ngx-slider-recaptcha";
 import { Observable, of } from "rxjs";
 
 export class CustomImageRetriever implements NgxSliderImageRetriever {

@@ -4,7 +4,7 @@ import { environment } from './environments/environment';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 import { CustomImageRetriever } from './app/config/custom-image-retriever';
-import { NgxSliderRecaptchaModule } from 'src/public-api';
+import { NgxSliderRecaptchaModule } from '@ngx-slider-recaptcha';
 
 if (environment.production) {
   enableProdMode();
