@@ -22,17 +22,17 @@
     {
       "glob": "**/*",
       "input": "src/assets/fonts",
-      "output": "assets/fonts"
+      "output": "fonts"
     },
     {
       "glob": "**/*.css",
       "input": "src/assets/styles",
-      "output": "assets/styles"
+      "output": "styles"
     },
     {
       "glob": "**/*",
       "input": "src/assets/images",
-      "output": "assets/images"
+      "output": "images"
     }
   ]
 }

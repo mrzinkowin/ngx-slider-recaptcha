@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NgxSliderRecaptchaComponent, NgxSliderRecaptchaConfig, VerificationResponse } from 'ngx-slider-recaptcha';
+import { NgxSliderRecaptchaComponent, NgxSliderRecaptchaConfig, VerificationResponse } from 'src/public-api';
+
 
 @Component({
   standalone: true,

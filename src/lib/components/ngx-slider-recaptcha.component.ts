@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./ngx-slider-recaptcha.component.scss'],
   imports: [CommonModule]
 })
-export class NgxSliderRecaptchaComponent implements OnChanges, AfterViewInit {
+export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterViewInit {
   @ViewChild('canvas', { static: true }) private canvas!: ElementRef<HTMLCanvasElement>;
   @ViewChild('block', { static: true }) private block!: ElementRef<HTMLCanvasElement>;
   @ViewChild('slider', { static: true }) private slider!: ElementRef;
@@ -34,7 +34,7 @@ export class NgxSliderRecaptchaComponent implements OnChanges, AfterViewInit {
   private _maskWidth: number = 0;
   private _isSliderDragging = false;
   private _verificationStatus: VerificationStatus = 'none';
-  private _config: NgxSliderRecaptchaConfig = { ...DEFAULT_SLIDER_RECAPTCHA_CONFIG };
+  private _sliderConfig!: NgxSliderRecaptchaConfig;
 
   private dragStartX = 0;
   private dragStartY = 0;
@@ -50,15 +50,18 @@ export class NgxSliderRecaptchaComponent implements OnChanges, AfterViewInit {
   constructor(
     private renderer: Renderer2,
     private cdr: ChangeDetectorRef,
-    @Inject(NGX_SLIDER_RECAPTCHA_CONFIG_TOKEN) private globalConfig: NgxSliderRecaptchaConfig,
+    @Inject(NGX_SLIDER_RECAPTCHA_CONFIG_TOKEN) private globalSliderConfig: NgxSliderRecaptchaConfig,
     @Inject(NGX_SLIDER_RECAPTCHA_VERIFIER_TOKEN) private verifier: NgxSliderRecaptchaVerifier<VerificationResponse>,
     @Inject(NGX_SLIDER_IMAGE_RETRIEVER_TOKEN) private imageRetriever: NgxSliderImageRetriever
   ) { }
 
+  ngOnInit(): void {
+    this._sliderConfig = { ...this.globalSliderConfig };
+  }
+
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['sliderRecaptchaConfig']?.currentValue) {
-      this._config = { ...this._config, ...this.globalConfig, ...this.sliderRecaptchaConfig };
-      console.log(this.config);
+      this._sliderConfig = { ...this._sliderConfig, ...this.sliderRecaptchaConfig };
 
       this.cdr.detectChanges()
     }
@@ -76,13 +79,13 @@ export class NgxSliderRecaptchaComponent implements OnChanges, AfterViewInit {
     this.renderer.setStyle(this.block.nativeElement, 'left', 0);
     this.trail = [];
     this._verificationStatus = 'none';
-    this._sliderText = this.config.loadingMessage!;
+    this._sliderText = this.sliderConfig.loadingMessage!;
     this.resetCanvas();
     this.renderPuzzle();
   }
 
   refresh(): void {
-    this._sliderText = this.config.instructionText;
+    this._sliderText = this.sliderConfig.instructionText;
     this.reset();
     this.onRefresh.emit();
   }
@@ -111,8 +114,8 @@ export class NgxSliderRecaptchaComponent implements OnChanges, AfterViewInit {
     return this._blockLeftPosition;
   }
 
-  get config() {
-    return this._config;
+  get sliderConfig() {
+    return this._sliderConfig;
   }
 
   @HostListener('document:mousedown', ['$event'])
@@ -135,11 +138,11 @@ export class NgxSliderRecaptchaComponent implements OnChanges, AfterViewInit {
     const { x, y } = this.extractEventCoordinates(event);
     let moveX: number = x - this.dragStartX;
     let moveY: number = y - this.dragStartY;
-    if (moveX < 0 || moveX + 40 > this.config.width!) return;
+    if (moveX < 0 || moveX + 40 > this.sliderConfig.width!) return;
 
     this._sliderLeftPosition = (moveX - 1);
     this._maskWidth = (moveX + 4);
-    this._blockLeftPosition = (this.config.width! - 40 - 20) / (this.config.width! - 40) * moveX;
+    this._blockLeftPosition = (this.sliderConfig.width! - 40 - 20) / (this.sliderConfig.width! - 40) * moveX;
     this.trail.push(Math.round(moveY));
   }
 
@@ -154,12 +157,12 @@ export class NgxSliderRecaptchaComponent implements OnChanges, AfterViewInit {
     this.verifier.verify(this.trail).subscribe({
       next: (response) => {
         let left = parseInt(this.block.nativeElement.style.left);
-        let spliced = Math.abs(left - this.sliderPuzzlePositionX) < this.config.toleranceOffset!;
+        let spliced = Math.abs(left - this.sliderPuzzlePositionX) < this.sliderConfig.toleranceOffset!;
         if (spliced && response.success) {
           this._verificationStatus = 'success';
           this.onResolved.emit(response);
         } else {
-          this._sliderText = this.config.errorMessage;
+          this._sliderText = this.sliderConfig.errorMessage;
           this._verificationStatus = 'fail';
           setTimeout(() => this.reset(), 1000);
         }
@@ -179,8 +182,8 @@ export class NgxSliderRecaptchaComponent implements OnChanges, AfterViewInit {
       throw new Error("Failed to initialize canvas contexts");
     }
 
-    this.ctx.canvas.width = this.config.width! - 2;
-    this.ctx.canvas.height = this.config.height!;
+    this.ctx.canvas.width = this.sliderConfig.width! - 2;
+    this.ctx.canvas.height = this.sliderConfig.height!;
   }
 
   private initializeCaptcha() {
@@ -193,11 +196,11 @@ export class NgxSliderRecaptchaComponent implements OnChanges, AfterViewInit {
     img.onload = () => this.configurePuzzleImage(img);
     img.onerror = () => this.retryImageLoad(img);
     this.fetchImageSource(img);
-    this._sliderText = this.config.loadingMessage;
+    this._sliderText = this.sliderConfig.loadingMessage;
   }
 
   private configurePuzzleImage(img: HTMLImageElement): void {
-    const { width, height, sliderLength, sliderRadius, instructionText } = this.config;
+    const { width, height, sliderLength, sliderRadius, instructionText } = this.sliderConfig;
     var puzzleLength = sliderLength! + sliderRadius! * 2 + 3;
     this.sliderPuzzlePositionX = this.generateRandomNumber(puzzleLength + 10, width! - (puzzleLength + 10));
     this.sliderPuzzlePositionY = this.generateRandomNumber(10 + sliderRadius! * 2, height! - (puzzleLength + 10));
@@ -216,9 +219,7 @@ export class NgxSliderRecaptchaComponent implements OnChanges, AfterViewInit {
 
   private retryImageLoad(img: HTMLImageElement): void {
     this.loadCount++;
-    if (this.loadCount <= this.config.maxRetryAttempts!) {
-      console.log("Loading failed : ", this.loadCount);
-
+    if (this.loadCount <= this.sliderConfig.maxRetryAttempts!) {
       this._sliderText = 'Loading failed';
       this.renderPuzzle()
     } else {
@@ -234,11 +235,11 @@ export class NgxSliderRecaptchaComponent implements OnChanges, AfterViewInit {
   }
 
   private loadFallbackImage(): string {
-    return `assets/images/ngx-slider-recaptcha-${Math.floor(Math.random() * 4)}.jpg`;
+    return `images/ngx-slider-recaptcha-${Math.floor(Math.random() * 4)}.jpg`;
   }
 
   private drawPuzzlePieceShape(ctx: CanvasRenderingContext2D, operation: 'fill' | 'clip'): void {
-    const { sliderLength: l, sliderRadius: r } = this.config;
+    const { sliderLength: l, sliderRadius: r } = this.sliderConfig;
     const { PI } = Math;
     const { sliderPuzzlePositionX: x, sliderPuzzlePositionY: y } = this;
 
@@ -264,7 +265,7 @@ export class NgxSliderRecaptchaComponent implements OnChanges, AfterViewInit {
   };
 
   private resetCanvas(): void {
-    const { width, height } = this.config;
+    const { width, height } = this.sliderConfig;
     this.ctx.clearRect(0, 0, width!, height!);
     this.blockCtx.clearRect(0, 0, width!, height!);
     this.renderer.setAttribute(this.block.nativeElement, 'width', width!.toString());
