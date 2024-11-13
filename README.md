@@ -1,3 +1,6 @@
+![Project Status](https://img.shields.io/badge/status-in%20progress-orange)
+# Status
+**This project is under active development and is not yet stable for production.** Expect frequent changes as we add features, improve performance, and address issues. 
 
 ---
 
