@@ -9,6 +9,7 @@ import { NgxSliderRecaptchaConfig } from '../config/ngx-slider-recaptcha-config'
 import { DEFAULT_SLIDER_RECAPTCHA_CONFIG } from '../config/default-ngx-slider-recaptcha-config';
 import { VerificationResponse } from '../core/ngx-slider-recaptcha-verification-response';
 import { CommonModule } from '@angular/common';
+import { VerificationRequest } from '../core/ngx-slider-recaptcha-verification-request';
 
 @Component({
   standalone: true,
@@ -33,6 +34,7 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
   private _blockLeftPosition: number = 0;
   private _maskWidth: number = 0;
   private _isSliderDragging = false;
+  private _isVerifying = false;
   private _verificationStatus: VerificationStatus = 'none';
   private _sliderConfig!: NgxSliderRecaptchaConfig;
 
@@ -51,7 +53,7 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
     private renderer: Renderer2,
     private cdr: ChangeDetectorRef,
     @Inject(NGX_SLIDER_RECAPTCHA_CONFIG_TOKEN) private globalSliderConfig: NgxSliderRecaptchaConfig,
-    @Inject(NGX_SLIDER_RECAPTCHA_VERIFIER_TOKEN) private verifier: NgxSliderRecaptchaVerifier<VerificationResponse>,
+    @Inject(NGX_SLIDER_RECAPTCHA_VERIFIER_TOKEN) private verifier: NgxSliderRecaptchaVerifier<VerificationRequest, VerificationResponse>,
     @Inject(NGX_SLIDER_IMAGE_RETRIEVER_TOKEN) private imageRetriever: NgxSliderImageRetriever
   ) { }
 
@@ -94,6 +96,10 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
     return this._isSliderDragging;
   }
 
+  get isVerifying() {
+    return this._isVerifying;
+  }
+
   get sliderText() {
     return this._sliderText;
   }
@@ -123,7 +129,7 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
   private onDragStart(event: MouseEvent | TouchEvent): void {
     const target = event.target as HTMLElement;
 
-    if (!this.slider.nativeElement.contains(target)) {
+    if (this.isVerifying || !this.slider.nativeElement.contains(target)) {
       return;
     }
 
@@ -134,7 +140,7 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
   @HostListener('document:mousemove', ['$event'])
   @HostListener('document:touchmove', ['$event'])
   private onDragMove(event: MouseEvent | TouchEvent): void {
-    if (!this._isSliderDragging) return;
+    if (this.isVerifying || !this._isSliderDragging) return;
     const { x, y } = this.extractEventCoordinates(event);
     let moveX: number = x - this.dragStartX;
     let moveY: number = y - this.dragStartY;
@@ -149,25 +155,36 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
   @HostListener('document:mouseup', ['$event'])
   @HostListener('document:touchend', ['$event'])
   private onDragEnd(event: MouseEvent | TouchEvent): void {
-    if (!this._isSliderDragging) return;
+    if (this.isVerifying || !this._isSliderDragging) return;
     this._isSliderDragging = false;
     const { x } = this.extractEventCoordinates(event);
     if (x === this.dragStartX) return;
 
-    this.verifier.verify(this.trail).subscribe({
-      next: (response) => {
-        let left = parseInt(this.block.nativeElement.style.left);
-        let spliced = Math.abs(left - this.sliderPuzzlePositionX) < this.sliderConfig.toleranceOffset!;
-        if (spliced && response.success) {
+    let blockPosition = parseInt(this.block.nativeElement.style.left);
+    const verificationRequest: VerificationRequest = {
+      sliderMovements: this.trail,
+      puzzelBlockPosition: blockPosition,
+      puzzelPosition: this.sliderPuzzlePositionX,
+      toleranceOffset: this.sliderConfig.toleranceOffset!
+    };
+
+    this._isVerifying = true;
+
+    this.verifier.verify(verificationRequest).subscribe({
+      next: (response: VerificationResponse) => {
+        this._isVerifying = false;
+        if (response.success) {
           this._verificationStatus = 'success';
           this.onResolved.emit(response);
         } else {
           this._sliderText = this.sliderConfig.errorMessage;
           this._verificationStatus = 'fail';
+          this.onError.emit("Verification failed");
           setTimeout(() => this.reset(), 1000);
         }
       },
       error: (error: any) => {
+        this._isVerifying = false;
         this.onError.emit(error);
         setTimeout(() => this.reset(), 1000);
       }

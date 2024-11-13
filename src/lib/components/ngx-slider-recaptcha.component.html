@@ -10,7 +10,7 @@
                 <i class="slider-icon fa fa-arrow-right"></i>
             </div>
         </div>
-        <span class="slider-text">{{ sliderText }}</span>
+        <span class="slider-text" *ngIf="!isVerifying">{{ sliderText }}</span>
     </div>
     <i *ngIf="sliderConfig.allowRefresh" class="refresh-icon" [class]="sliderConfig.refreshIcon" (click)="refresh()"></i>
 </div>
