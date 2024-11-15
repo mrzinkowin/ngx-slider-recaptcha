@@ -18,10 +18,9 @@ import { VerificationRequest } from '../core/ngx-slider-recaptcha-verification-r
   styleUrls: ['./ngx-slider-recaptcha.component.scss'],
   imports: [CommonModule]
 })
-export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterViewInit {
+export class NgxSliderRecaptchaComponent implements OnChanges, AfterViewInit {
   @ViewChild('canvas', { static: true }) private canvas!: ElementRef<HTMLCanvasElement>;
   @ViewChild('block', { static: true }) private block!: ElementRef<HTMLCanvasElement>;
-  @ViewChild('sliderContainer', { static: true }) private sliderContainer!: ElementRef<HTMLElement>;
   @ViewChild('slider', { static: true }) private slider!: ElementRef<HTMLElement>;
 
   @Input() config: NgxSliderRecaptchaConfig = { ...DEFAULT_SLIDER_RECAPTCHA_CONFIG };
@@ -58,19 +57,16 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
     @Inject(NGX_SLIDER_IMAGE_RETRIEVER_TOKEN) private imageRetriever: NgxSliderImageRetriever
   ) { }
 
-  ngOnInit(): void {
-    this._sliderConfig = { ...this.globalSliderConfig, ...this.config };
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['config']?.currentValue) {
-      this._sliderConfig = { ...this._sliderConfig, ...this.config };
-
+      this._sliderConfig = { ...this._sliderConfig, ...this.globalSliderConfig, ...this.config };
+      this.initializeStyles();
       this.cdr.detectChanges()
     }
   }
 
   ngAfterViewInit() {
+    this.initializeStyles();
     this.initializeCanvasContexts();
     this.initializeCaptcha();
     this.cdr.detectChanges();
@@ -203,8 +199,9 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
     }
 
     setTimeout(() => {
+      const SLIDER_CONTAINER_MARGIN = 9;
       this.ctx.canvas.width = this.sliderConfig.width! - 2;
-      this.ctx.canvas.height = this.sliderConfig.height! - this.sliderContainer.nativeElement.offsetHeight;
+      this.ctx.canvas.height = this.sliderConfig.height! - (this.sliderConfig.sliderContainerHeight! + SLIDER_CONTAINER_MARGIN);
     });
 
   }
@@ -223,7 +220,7 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
   }
 
   private configurePuzzleImage(img: HTMLImageElement): void {
-    const { width, height, sliderLength, sliderRadius, instructionText } = this.sliderConfig;
+    const { width, sliderLength, sliderRadius, instructionText } = this.sliderConfig;
     var puzzleLength = sliderLength! + sliderRadius! * 2 + 3;
     this.sliderPuzzlePositionX = this.generateRandomNumber(puzzleLength + 10, width! - (puzzleLength + 10));
     this.sliderPuzzlePositionY = this.generateRandomNumber(10 + sliderRadius! * 2, this.ctx.canvas.height - (puzzleLength + 10));
@@ -307,5 +304,34 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
     const { x, y } = this.extractEventCoordinates(event);
     this.dragStartX = x;
     this.dragStartY = y;
+  }
+
+  private initializeStyles(): void {
+    const { primaryColor, successColor, errorColor, textColor, containerBackgroundColor, containerBorderColor, commonBorderRadius, sliderContainerHeight } = this.sliderConfig;
+    this.setStyle('--recaptcha-primary-color', primaryColor!);
+    this.setStyle('--recaptcha-error-color', errorColor!);
+    this.setStyle('--recaptcha-success-color', successColor!);
+    this.setStyle('--recaptcha-text-color', textColor!);
+    this.setStyle('--recaptcha-container-background-color', containerBackgroundColor!);
+    this.setStyle('--recaptcha-container-border-color', containerBorderColor!);
+    this.setStyle('--recaptcha-common-border-radius', `${commonBorderRadius!}px`);
+    this.setStyle('--recaptcha-slider-container-height', `${sliderContainerHeight!}px`);
+    this.setStyle('--recaptcha-slider-mask-primary-color', this.hexToRgba(primaryColor!, 0.3));
+    this.setStyle('--recaptcha-slider-mask-success-color', this.hexToRgba(successColor!, 0.3));
+    this.setStyle('--recaptcha-slider-mask-error-color', this.hexToRgba(errorColor!, 0.3));
+  }
+
+  private setStyle(property: string, value: string): void {
+    document.documentElement.style.setProperty(property, value);
+  }
+
+  private hexToRgba(hex: string, opacity: number): string {
+    const sanitizedHex = hex?.replace(/^#/, '');
+
+    const [r, g, b] = [0, 2, 4].map((start) =>
+      parseInt(sanitizedHex.slice(start, start + 2), 16)
+    );
+
+    return `rgba(${r}, ${g}, ${b}, ${opacity})`;
   }
 }

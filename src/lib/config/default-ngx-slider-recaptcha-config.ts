@@ -9,7 +9,14 @@ export const DEFAULT_SLIDER_RECAPTCHA_CONFIG: NgxSliderRecaptchaConfig = {
     loadingMessage: 'Loading...',
     errorMessage: 'Please try again',
     instructionText: 'Slide to complete the puzzle',
-    refreshIcon: 'fa fa-repeat',
     maxRetryAttempts: 3,
-    allowRefresh: false
+    allowRefresh: false,
+    primaryColor: '#0083c1',
+    errorColor: '#c4161c',
+    successColor: '#52ccba',
+    textColor: '#4b4b4b',
+    containerBackgroundColor: '#f7f9fa',
+    containerBorderColor: '#e6e8eb',
+    commonBorderRadius: 4,
+    sliderContainerHeight: 40,
 };

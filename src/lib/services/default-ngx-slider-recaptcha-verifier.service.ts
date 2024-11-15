@@ -16,14 +16,14 @@ export class DefaultNgxSliderRecaptchaVerifier implements NgxSliderRecaptchaVeri
             });
         }
 
-        const { sliderMovements, blockPosition, puzzelPosition, toleranceOffset: offset } = verificationRequest;
+        const { sliderMovements, puzzelBlockPosition, puzzelPosition, toleranceOffset: offset } = verificationRequest;
         const averageMovement = sliderMovements.reduce((sum, value) => sum + value, 0) / sliderMovements.length;
         const movementDeviation = Math.sqrt(
             sliderMovements.reduce((sum, value) => sum + Math.pow(value - averageMovement, 2), 0) / sliderMovements.length
         );
 
         const isVerified = movementDeviation !== 0;
-        const isSpliced = Math.abs(blockPosition - puzzelPosition) < (offset ?? 0);
+        const isSpliced = Math.abs(puzzelBlockPosition - puzzelPosition) < (offset ?? 0);
 
 
         const response: VerificationResponse = {

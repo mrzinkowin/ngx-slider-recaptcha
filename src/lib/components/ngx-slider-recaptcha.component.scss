@@ -1,20 +1,9 @@
-// :root {
-//   --recaptcha-primary-color: blue;
-//   --recaptcha-error-color: red;
-//   --recaptcha-success-color: green;
-//   --recaptcha-container-background-color: #f7f9fa;
-//   --recaptcha-container-border-color: #e6e8eb;
-//   --recaptcha-text-color: #45494c;
-//   --recaptcha-common-borderr-radius: 4px;
-// }
-
 .captcha-container {
   display: flex;
   flex-direction: column;
   position: relative;
 }
 
-// canvas
 .canvas {
   border: 1px solid #ccc;
   border-radius: 3px;
@@ -54,6 +43,7 @@
     transform: translate(-1px, -1px);
     border-radius: calc(var(--recaptcha-common-border-radius) - 1px);
   }
+
   .slider-icon:before {
     content: "\2794";
   }
@@ -83,6 +73,7 @@
 
   &:hover {
     background: var(--recaptcha-primary-color);
+
     .slider-icon {
       background-position: 0 -13px;
       color: #fff;
@@ -90,7 +81,6 @@
   }
 }
 
-// active
 .active {
   .slider {
     top: -1px;
@@ -105,7 +95,6 @@
   }
 }
 
-// success
 .success {
   .slider {
     top: -1px;
@@ -113,15 +102,17 @@
     background-color: var(--recaptcha-success-color);
     color: #fff;
   }
+
   .slider-mask {
     border-color: var(--recaptcha-success-color);
     background-color: #d2f4ef;
   }
+
   .slider-icon:before {
     content: "\2713";
   }
 }
-// fail
+
 .fail {
   .slider {
     top: -1px;
@@ -140,7 +131,6 @@
   }
 }
 
-// refresh
 .refresh-icon {
   position: absolute;
   right: 6px;
@@ -150,6 +140,10 @@
   font-size: 1rem;
   z-index: 5;
   transition: color 0.3s linear;
+}
+
+.refresh-icon::before{
+  content: '\27F3';
 }
 
 .refresh-icon:hover {

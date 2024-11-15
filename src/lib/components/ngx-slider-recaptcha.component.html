@@ -1,15 +1,15 @@
-<div class="captcha-container" [style.width.px]="sliderConfig.width" [style.height.px]="sliderConfig.height" #captchaContainer>
+<div #captchaContainer class="captcha-container" [style.width.px]="sliderConfig.width" [style.height.px]="sliderConfig.height">
     <canvas #canvas class="canvas"></canvas>
     <canvas #block class="block" [style.left.px]="blockLeftPosition"></canvas>
-    <div #sliderContainer class="slider-container" [class.active]="isSliderDragging"
-        [class.slider-container-success]="verificationStatus === 'success'"
+    <div class="slider-container" [class.active]="isSliderDragging"
+        [class.success]="verificationStatus === 'success'"
         [class.fail]="verificationStatus === 'fail'">
         <div class="slider-mask" [style.width.px]="maskWidth">
             <div #slider class="slider" [style.left.px]="sliderLeftPosition">
-                 <span class="slider-icon"></span>
+                <span class="slider-icon"></span>
             </div>
         </div>
         <span class="slider-text" *ngIf="!isVerifying">{{ sliderText }}</span>
     </div>
-    <i *ngIf="sliderConfig.allowRefresh" class="refresh-icon" [class]="sliderConfig.refreshIcon" (click)="refresh()"></i>
+    <i *ngIf="sliderConfig.allowRefresh" class="refresh-icon" (click)="refresh()"></i>
 </div>
