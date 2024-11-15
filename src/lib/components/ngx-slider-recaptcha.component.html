@@ -1,7 +1,7 @@
 <div class="captcha-container" [style.width.px]="sliderConfig.width" [style.height.px]="sliderConfig.height" #captchaContainer>
     <canvas #canvas class="canvas"></canvas>
     <canvas #block class="block" [style.left.px]="blockLeftPosition"></canvas>
-    <div class="slider-container" [class.slider-container-active]="isSliderDragging"
+    <div #sliderContainer class="slider-container" [class.slider-container-active]="isSliderDragging"
         [class.slider-container-success]="verificationStatus === 'success'"
         [class.slider-container-fail]="verificationStatus === 'fail'">
         <div class="slider-bg"></div>
