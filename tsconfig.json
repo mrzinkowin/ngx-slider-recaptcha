@@ -15,6 +15,9 @@
     "paths": {
       "ngx-slider-recaptcha": [
         "dist/ngx-slider-recaptcha"
+      ],
+      "@ngx-slider-recaptcha": [
+        "src/public-api.ts"
       ]
     },
     "declaration": false,

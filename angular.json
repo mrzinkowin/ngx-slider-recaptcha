@@ -133,8 +133,7 @@
               "projects/slider-recaptcha-demo/src/assets"
             ],
             "styles": [
-              "projects/slider-recaptcha-demo/src/styles.scss",
-               "./src/assets/styles/font-awesome.css"
+              "projects/slider-recaptcha-demo/src/styles.scss"
             ],
             "scripts": []
           }
@@ -171,8 +170,7 @@
               }
             ],
             "styles": [
-              "projects/slider-recaptcha-custom-demo/src/styles.scss",
-              "./src/assets/styles/font-awesome.css"
+              "projects/slider-recaptcha-custom-demo/src/styles.scss"
             ],
             "scripts": []
           },

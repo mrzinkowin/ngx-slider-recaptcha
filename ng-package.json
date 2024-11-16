@@ -21,18 +21,8 @@
     },
     {
       "glob": "**/*",
-      "input": "src/assets/fonts",
-      "output": "assets/fonts"
-    },
-    {
-      "glob": "**/*.css",
-      "input": "src/assets/styles",
-      "output": "assets/styles"
-    },
-    {
-      "glob": "**/*",
       "input": "src/assets/images",
-      "output": "assets/images"
+      "output": "images"
     }
   ]
 }

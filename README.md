@@ -95,14 +95,14 @@ To start using `NgxSliderRecaptcha`:
 
     Add the following to your angular.json file under the styles section:
     ```json
-       "node_modules/ngx-slider-recaptcha/assets/styles/font-awesome.css"
+       "node_modules/ngx-slider-recaptcha/styles/font-awesome.css"
      ```
   
      If you want to use the default slider images, add the following to your angular.json file under the assets section:
      ```json
       {
         "glob": "**/*",
-        "input": "node_modules/ngx-slider-recaptcha/assets/images",
+        "input": "node_modules/ngx-slider-recaptcha/images",
         "output": "/assets/images"
       }
      ```
