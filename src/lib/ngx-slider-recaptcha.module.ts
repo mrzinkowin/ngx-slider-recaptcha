@@ -1,12 +1,12 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { NgxSliderRecaptchaComponent } from './components/ngx-slider-recaptcha.component';
 import { CommonModule } from '@angular/common';
-import { DefaultNgxSliderRecaptchaVerifier } from './services/default-ngx-slider-recaptcha-verifier.service';
-import { NGX_SLIDER_RECAPTCHA_VERIFIER_TOKEN } from './tokens/slider-recaptcha-verifier.token';
-import { NGX_SLIDER_IMAGE_RETRIEVER_TOKEN } from './tokens/slider-image-retriever.token';
-import { DefaultNgxSliderImageRetriever } from './services/default-ngx-slider-image-retriever.service';
-import { NGX_SLIDER_RECAPTCHA_CONFIG_TOKEN } from './tokens/slider-recaptcha-config.token';
-import { NgxSliderRecaptchaOptions } from './config/ngx-slider-recaptcha-option';
+import { DefaultNgxSliderRecaptchaVerificationService } from './services/default-ngx-slider-recaptcha-verification.service';
+import { NGX_SLIDER_RECAPTCHA_VERIFICATION_SERVICE_TOKEN } from './tokens/ngx-slider-recaptcha-verification-service.token';
+import { NGX_SLIDER_RECAPTCHA_IMAGE_SERVICE_TOKEN } from './tokens/ngx-slider-recaptcha-image-service.token';
+import { DefaultNgxSliderRecaptchaImageService } from './services/default-ngx-slider-recaptcha-image.service';
+import { NGX_SLIDER_RECAPTCHA_CONFIG_TOKEN } from './tokens/ngx-slider-recaptcha-config.token';
+import { NgxSliderRecaptchaOptions } from './config/ngx-slider-recaptcha-options';
 import { DEFAULT_SLIDER_RECAPTCHA_CONFIG } from './config/default-ngx-slider-recaptcha-config';
 
 @NgModule({
@@ -23,12 +23,12 @@ import { DEFAULT_SLIDER_RECAPTCHA_CONFIG } from './config/default-ngx-slider-rec
       useValue: DEFAULT_SLIDER_RECAPTCHA_CONFIG
     },
     {
-      provide: NGX_SLIDER_RECAPTCHA_VERIFIER_TOKEN,
-      useClass: DefaultNgxSliderRecaptchaVerifier
+      provide: NGX_SLIDER_RECAPTCHA_VERIFICATION_SERVICE_TOKEN,
+      useClass: DefaultNgxSliderRecaptchaVerificationService
     },
     {
-      provide: NGX_SLIDER_IMAGE_RETRIEVER_TOKEN,
-      useClass: DefaultNgxSliderImageRetriever
+      provide: NGX_SLIDER_RECAPTCHA_IMAGE_SERVICE_TOKEN,
+      useClass: DefaultNgxSliderRecaptchaImageService
     }
   ]
 })
@@ -37,24 +37,24 @@ export class NgxSliderRecaptchaModule {
     options: NgxSliderRecaptchaOptions = {}
   ): ModuleWithProviders<NgxSliderRecaptchaModule> {
     const {
-      config = DEFAULT_SLIDER_RECAPTCHA_CONFIG,
-      customVerifier = DefaultNgxSliderRecaptchaVerifier,
-      customImageRetriever = DefaultNgxSliderImageRetriever
+      sliderConfig = DEFAULT_SLIDER_RECAPTCHA_CONFIG,
+      verificationService = DefaultNgxSliderRecaptchaVerificationService,
+      imageRetrievalService = DefaultNgxSliderRecaptchaImageService
     } = options;
     return {
       ngModule: NgxSliderRecaptchaModule,
       providers: [
         {
           provide: NGX_SLIDER_RECAPTCHA_CONFIG_TOKEN,
-          useValue: config
+          useValue: sliderConfig
         },
         {
-          provide: NGX_SLIDER_RECAPTCHA_VERIFIER_TOKEN,
-          useClass: customVerifier || DefaultNgxSliderRecaptchaVerifier
+          provide: NGX_SLIDER_RECAPTCHA_VERIFICATION_SERVICE_TOKEN,
+          useClass: verificationService
         },
         {
-          provide: NGX_SLIDER_IMAGE_RETRIEVER_TOKEN,
-          useClass: customImageRetriever || DefaultNgxSliderImageRetriever
+          provide: NGX_SLIDER_RECAPTCHA_IMAGE_SERVICE_TOKEN,
+          useClass: imageRetrievalService
         }
       ]
     };

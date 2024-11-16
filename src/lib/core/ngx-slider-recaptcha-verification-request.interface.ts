@@ -1,7 +1,7 @@
 export interface VerificationRequest {
     sliderMovements: number[];
     toleranceOffset: number;
-    puzzelPosition: number;
-    puzzelBlockPosition: number;
+    puzzlePosition: number;
+    puzzleBlockPosition: number;
     [key: string]: any;
 }
