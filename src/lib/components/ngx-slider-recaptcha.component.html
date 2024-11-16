@@ -1,11 +1,11 @@
 <div #captchaContainer class="captcha-container" [style.width.px]="sliderConfig.width" [style.height.px]="sliderConfig.height">
     <canvas #canvas class="canvas"></canvas>
-    <canvas #block class="block" [style.left.px]="blockLeftPosition"></canvas>
+    <canvas #block class="block" [style.left.px]="blockOffsetX"></canvas>
     <div class="slider-container" [class.active]="isSliderDragging"
         [class.success]="verificationStatus === 'success'"
         [class.fail]="verificationStatus === 'fail'">
         <div class="slider-mask" [style.width.px]="maskWidth">
-            <div #slider class="slider" [style.left.px]="sliderLeftPosition">
+            <div #slider class="slider" [style.left.px]="sliderOffsetX">
                 <span class="slider-icon"></span>
             </div>
         </div>
