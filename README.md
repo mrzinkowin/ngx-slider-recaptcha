@@ -1,12 +1,15 @@
-![Project Status](https://img.shields.io/badge/status-in%20progress-orange)
-# Status
-**This project is under active development and is not yet stable for production.** Expect frequent changes as we add features, improve performance, and address issues. 
+# Ngx Slider reCAPTCHA
 
----
+Ngx Slider reCAPTCHA is a customizable Angular library that provides a slider-based CAPTCHA component to help secure forms from spam and bot submissions. The library offers multiple configuration options that allow for detailed customization of appearance, behavior, and feedback.
 
-# NgxSliderRecaptcha
+![Angular](https://img.shields.io/badge/Angular-%23DD0031.svg?style=flat&logo=angular&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-%23007ACC.svg?style=flat&logo=typescript&logoColor=white)
 
-`NgxSliderRecaptcha` is a customizable Angular library that provides a slider-based CAPTCHA component to help secure forms from spam and bot submissions. The library offers multiple configuration options that allow for detailed customization of appearance, behavior, and feedback.
+![npm](https://img.shields.io/npm/v/ngx-slider-recaptcha)
+![Downloads](https://img.shields.io/npm/dw/ngx-slider-recaptcha)
+![License](https://img.shields.io/github/license/mrzinkowin/ngx-slider-recaptcha)
+![GitHub contributors](https://img.shields.io/github/contributors/mrzinkowin/ngx-slider-recaptcha)
+![GitHub stars](https://img.shields.io/github/stars/mrzinkowin/ngx-slider-recaptcha?style=social)
 
 ---
 
@@ -26,6 +29,7 @@
 - [Customization](#customization)
   - [Custom Image Retrieval](#custom-image-retrieval)
   - [Custom Verification](#custom-verification)
+- [Contributors](#contributors) 
 - [Acknowledgements](#acknowledgements)
 - [License](#license)
 
@@ -60,77 +64,105 @@ To start using `NgxSliderRecaptcha`:
 
 1. **Import** `NgxSliderRecaptchaModule` in your app module and optionally configure it globally.
 
-   ```typescript
-   import { NgxSliderRecaptchaModule } from 'ngx-slider-recaptcha';
-
-   @NgModule({
-     imports: [
-       NgxSliderRecaptchaModule
-     ]
-   })
-   export class AppModule {}
-   ```
+```typescript
+@NgModule({
+  imports: [
+    NgxSliderRecaptchaModule
+  ]
+})
+export class AppModule {}
+```
 
 2. **Add** `<ngx-slider-recaptcha></ngx-slider-recaptcha>` in your template:
 
-   ```html
-   <ngx-slider-recaptcha (onResolved)="onResolved($event)"></ngx-slider-recaptcha>
-   ```
+```html
+<ngx-slider-recaptcha (onResolved)="onResolved($event)"></ngx-slider-recaptcha>
+```
 
 3. **Handle** the verification event in your component:
 
-   ```typescript
-   export class AppComponent {
-     onResolved(event: VerificationResponse): void {
-       if (event.success) {
-         console.log('Verification successful');
-       } else {
-         console.log('Verification failed');
-       }
-     }
-   }
-   ```
+```typescript
+export class AppComponent {
+  onResolved(event: VerificationResponse): void {
+    if (event.success) {
+      console.log('Verification successful');
+    } else {
+      console.log('Verification failed');
+    }
+  }
+}
+```
 
-4. **Update** angular.json for default slider images and icons:
-
-    Add the following to your angular.json file under the styles section:
-    ```json
-       "node_modules/ngx-slider-recaptcha/styles/font-awesome.css"
-     ```
+4. **Update** angular.json for default slider images:
   
-     If you want to use the default slider images, add the following to your angular.json file under the assets section:
-     ```json
-      {
-        "glob": "**/*",
-        "input": "node_modules/ngx-slider-recaptcha/images",
-        "output": "/assets/images"
-      }
-     ```
+If you want to use the default slider images, add the following to your angular.json file under the assets section:
+```json
+{
+  "glob": "**/*",
+  "input": "node_modules/ngx-slider-recaptcha/images",
+  "output": "/assets/images"
+}
+```
 ---
 
 ## Configuration
 
-`NgxSliderRecaptcha` supports multiple configuration levels, making it flexible and easy to adapt to different use cases. The three main configuration levels are **default**, **global**, and **instance-level** configurations.
+`Ngx Slider reCAPTCHA` supports multiple configuration levels, making it flexible and easy to adapt to different use cases. The three main configuration levels are **default**, **global**, and **instance-level** configurations.
 
 ### Default Configuration
 
-By default, `NgxSliderRecaptcha` uses predefined settings that are suitable for most use cases. These values are defined in the `DEFAULT_SLIDER_RECAPTCHA_CONFIG` object:
+By default, `Ngx Slider reCAPTCHA` uses predefined settings that are suitable for most use cases. These values are defined in the `DEFAULT_SLIDER_RECAPTCHA_CONFIG` object:
 
 ```typescript
 export const DEFAULT_SLIDER_RECAPTCHA_CONFIG: NgxSliderRecaptchaConfig = {
-    width: 280,                          // slider container width
-    height: 155,                         // slider container height
-    sliderLength: 42,                    // Slider handle length
-    sliderRadius: 9,                     // Slider handle radius
-    toleranceOffset: 5,                  // Deviation tolerance for verification
-    loadingMessage: 'Loading...',        // Message displayed while loading
-    errorMessage: 'Please try again',    // Error message on verification failure
-    instructionText: 'Slide to complete the puzzle',  // Instructional text
-    refreshIcon: 'fa fa-repeat',         // Icon class for refresh button
-    maxRetryAttempts: 3,                 // Max retry attempts
-    allowRefresh: false                  // Allow slider recaptcha refresh
+  width: 300,
+  height: 200,
+  puzzleSize: 42,
+  puzzleRadius: 9,
+  sliderContainerHeight: 40,
+
+  toleranceOffset: 5,
+  maxRetryAttempts: 3,
+  allowRefresh: false,
+
+  primaryColor: '#0083c1',
+  errorColor: '#c4161c',
+  successColor: '#52ccba',
+  textColor: '#4b4b4b',
+  sliderContainerBackgroundColor: '#f7f9fa',
+  sliderContainerBorderColor: '#e6e8eb',
+  borderRadius: 4,
+
+  loadingText: 'Loading...',
+  instructionText: 'Slide to complete the puzzle',
 };
 ```
+
+---
+
+#### Slider reCAPTCHA Configuration Options
+
+| **Property**                     | **Type**            | **Default**  | **Description**                                                  |
+|-----------------------------------|---------------------|--------------|------------------------------------------------------------------|
+| `width`                          | `number`            | `300`        | Width of the slider reCAPTCHA container in pixels.               |
+| `height`                         | `number`            | `200`        | Height of the slider reCAPTCHA container in pixels.              |
+| `puzzleSize`                     | `number`            | `40`         | Size of the puzzle piece in pixels.                              |
+| `puzzleRadius`                   | `number`            | `5`          | Radius of the puzzle piece.                                      |
+| `sliderContainerHeight`          | `number`            | `40`         | Height of the slider container.                                  |
+| `toleranceOffset`                | `number`            | `5`          | Allowable deviation for successful verification in pixels.       |
+| `maxRetryAttempts`               | `number`            | `3`          | Maximum number of retry attempts allowed for image retrieval.    |
+| `allowRefresh`                   | `boolean`           | `false`      | Determines if the slider reCAPTCHA can be refreshed by the user. |
+| `primaryColor`                   | `string`            | `"#0083c1"`  | Primary color for the slider elements.                           |
+| `errorColor`                     | `string`            | `"#c4161c"`  | Color indicating an error state.                                 |
+| `successColor`                   | `string`            | `"#52ccba"`  | Color indicating a success state.                                |
+| `textColor`                      | `string`            | `"#4b4b4b"`  | Color of loading or instructional text.                          |
+| `sliderContainerBackgroundColor` | `string`            | `"#f7f9fa"`  | Background color of the slider container.                        |
+| `sliderContainerBorderColor`     | `string`            | `"#e6e8eb"`  | Border color of the slider container.                            |
+| `borderRadius`                   | `number`            | `4`          | Border radius for the slider and container elements.             |
+| `loadingText`                    | `string`            | `"Loading..."` | Message shown while loading.                                     |
+| `instructionText`                | `string`            | `"Slide to complete the puzzle"` | Text providing instructions to users.                            |
+
+---
 
 ### Global Configuration
 
@@ -145,8 +177,6 @@ To set a global configuration:
       config: {
         width: 320,
         height: 160,
-        sliderLength: 50,
-        errorMessage: 'Please slide again',
         allowRefresh: true
       }
     })
@@ -154,20 +184,7 @@ To set a global configuration:
 })
 export class AppModule {}
 ```
-
-#### Global Configuration Options
-
-- **`width`**: Width of the CAPTCHA container.
-- **`height`**: Height of the CAPTCHA container.
-- **`sliderLength`**: Length of the slider handle.
-- **`sliderRadius`**: Radius of the slider handle.
-- **`toleranceOffset`**: Allowable deviation for successful verification.
-- **`loadingMessage`**: Message shown while loading.
-- **`errorMessage`**: Message on verification failure.
-- **`instructionText`**: Text instructing users.
-- **`refreshIcon`**: Icon for refresh button.
-- **`maxRetryAttempts`**: Number of retry attempts allowed.
-- **`allowRefresh`**: Whether the CAPTCHA can be refreshed.
+---
 
 ### Instance-Level Configuration
 
@@ -180,13 +197,14 @@ Example of instance-level configuration in the template:
   [config]="{
     width: 300,
     height: 140,
-    errorMessage: 'Try sliding again!'
   }"
   (onResolved)="onResolved($event)"
 ></ngx-slider-recaptcha>
 ```
 
-In this example, only the width, height, and error message are overridden for this particular instance, while other settings will inherit from the global or default configuration.
+In this example, only the width and height are overridden for this particular instance, while other settings will inherit from the global or default configuration.
+
+---
 
 ### Configuration Hierarchy
 
@@ -200,27 +218,28 @@ In this example, only the width, height, and error message are overridden for th
 
 ### Custom Image Retrieval
 
-You can extend `NgxSliderImageRetriever ` by providing custom classes for image retrieval.
+You can extend `NgxSliderRecaptchaImageService ` by providing custom classes for image retrieval.
 
 #### 1. Default Image Retriever Support from Library
 
 ```typescript
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
-export class DefaultNgxSliderImageRetriever implements NgxSliderImageRetriever {
-    getSliderImages(): Observable<string> {
-        return of(`assets/images/ngx-slider-recaptcha-${Math.floor(Math.random() * 4)}.jpg`);
-    }
+export class DefaultNgxSliderRecaptchaImageService implements NgxSliderRecaptchaImageService {
+  getSliderImage(): Observable<string> {
+    return of(`assets/images/ngx-slider-recaptcha-${Math.floor(Math.random() * 4)}.jpg`);
+  }
 }
 ```
 
-#### 2. Custom Image Retriever
+#### 2. Custom Image Retrieval
 
-To use a custom image retriever, implement the `NgxSliderImageRetriever` interface in your Angular service. There are two methods for retrieving images:
+To use a custom image retriever, implement the `NgxSliderRecaptchaImageService` interface in your Angular service. There are three  methods for retrieving images:
 
 1. **Client-Side Retrieval (from assets)**
 2. **Server-Side Retrieval (from a backend, e.g., Spring Boot)**
+3. **External Image Retrieval (from a public API or external service)**
 
 ---
 
@@ -231,35 +250,26 @@ If your slider images are stored locally (e.g., in the `assets` folder), you can
 ###### Example: Client-Side Image Retrieval from Assets
 
 ```typescript
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { NgxSliderImageRetriever } from 'ngx-slider-recaptcha';
-
 @Injectable({
   providedIn: 'root'
 })
-export class CustomImageRetriever implements NgxSliderImageRetriever {
-  getSliderImages(): Observable<string> {
+export class CustomNgxSliderRecaptchaImageService implements NgxSliderRecaptchaImageService {
+  getSliderImage(): Observable<string> {
     return of('assets/path/to/your/image.jpg'); // Relative path to your image
   }
 }
 ```
+---
 
 ##### 2. Server-Side Retrieval (from Backend)
 
-To dynamically fetch CAPTCHA images from a server (e.g., a Spring Boot backend), you can serve images as Base64 strings or URLs.
+To dynamically fetch slider images from a server (e.g., a Spring Boot backend), you can serve images as Base64 strings or URLs.
 
 ###### Example: Server-Side Image Retrieval from Backend (Spring Boot)
 
 **Spring Boot Backend**
 
 ```java
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Base64;
-
 @RestController
 public class CaptchaController {
 
@@ -280,186 +290,211 @@ public class CaptchaController {
 **Frontend (Angular)**
 
 ```typescript
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { NgxSliderImageRetriever } from 'ngx-slider-recaptcha';
-import { catchError } from 'rxjs/operators';
-
 @Injectable({
   providedIn: 'root'
 })
-export class CustomImageRetriever implements NgxSliderImageRetriever {
+export class CustomNgxSliderRecaptchaImageService implements NgxSliderRecaptchaImageService {
   constructor(private http: HttpClient) {}
 
-  getSliderImages(): Observable<string> {
+  getSliderImage(): Observable<string> {
     return this.http.get<string>('/api/get-captcha-image').pipe(
       catchError(() => of('data:image/jpeg;base64,...')) // Fallback image
     );
   }
 }
 ```
+---
+##### 3. External Image Retrieval (from a public API or external service)
+```typescript
+@Injectable({
+  providedIn: 'root'
+})
+export class CustomNgxSliderRecaptchaImageService implements NgxSliderRecaptchaImageService {
+  getSliderImage(): Observable<string> {
+    const width = 280;
+    const height = 155;
 
-To use this custom retriever in the module:
+    const randomImageUrl = `https://picsum.photos/${width}/${height}?random=${Math.round(Math.random() * 1000)}`;
+    return of(randomImageUrl);
+  }
+}
+```
+---
+
+**To use this custom retriever in the module:**
 
 ```typescript
-NgxSliderRecaptchaModule.forRoot({
-  customImageRetriever: CustomImageRetriever
+@NgModule({
+  imports: [
+    NgxSliderRecaptchaModule.forRoot({
+      imageRetrievalService: CustomNgxSliderRecaptchaImageService
+    })
+  ]
 })
+export class AppModule {}
 ```
 
 ---
 
 ### Slider Image Verification
 
-You can extend `NgxSliderRecaptchaVerifier` by providing custom classes for verification.
+You can extend `NgxSliderRecaptchaVerificationService<E extends VerificationRequest, T extends VerificationResponse>` by providing custom classes for verification.
 
 #### Default Verifier Support from Library
 
 ```typescript
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
-export class DefaultNgxSliderRecaptchaVerifier implements NgxSliderRecaptchaVerifier<VerificationResponse> {
-    verify(sliderMovements: number[]): Observable<VerificationResponse> {
-        if (!sliderMovements || sliderMovements.length === 0) {
-            return of({
-                success: false,
-                message: 'No slider movement detected. Please try again.'
-            });
-        }
-
-        const averageMovement = sliderMovements.reduce((sum, value) => sum + value, 0) / sliderMovements.length;
-        const movementDeviation = Math.sqrt(
-            sliderMovements.reduce((sum, value) => sum + Math.pow(value - averageMovement, 2), 0) / sliderMovements.length
-        );
-
-        const isVerified = movementDeviation !== 0;
-
-        const response: VerificationResponse = {
-            success: isVerified,
-            message: isVerified ? 'Verification successful' : 'Verification failed',
-        };
-        return of(response);
+export class DefaultNgxSliderRecaptchaVerificationService implements NgxSliderRecaptchaVerificationService<VerificationRequest, VerificationResponse> {
+  verify(verificationRequest: VerificationRequest): Observable<VerificationResponse> {
+    if (!verificationRequest?.sliderMovements?.length) {
+      return of({
+        success: false,
+        message: 'No slider movement detected. Please try again.'
+      });
     }
+
+    const { sliderMovements, puzzleBlockPosition, puzzlePosition, toleranceOffset: offset } = verificationRequest;
+    const averageMovement = sliderMovements.reduce((sum, value) => sum + value, 0) / sliderMovements.length;
+    const movementDeviation = Math.sqrt(
+      sliderMovements.reduce((sum, value) => sum + Math.pow(value - averageMovement, 2), 0) / sliderMovements.length
+    );
+
+    const isVerified = movementDeviation !== 0;
+    const isSpliced = Math.abs(puzzleBlockPosition - puzzlePosition) < (offset ?? 0);
+
+
+    const response: VerificationResponse = {
+      success: isSpliced && isVerified,
+      message: isSpliced && isVerified ? 'Verification successful' : 'Verification failed',
+    };
+    return of(response);
+  }
 }
 ```
+---
 
 #### Custom Verification
 
-To use a custom verifier, implement the `NgxSliderRecaptchaVerifier` interface. The verification logic can be implemented either **client-side** or **server-side**.
+To use a custom verifier, implement the `NgxSliderRecaptchaVerificationService<E extends VerificationRequest, T extends VerificationResponse>` interface. The verification logic can be implemented either **client-side** or **server-side**.
 
 
 ##### 1. Client-Side Verification
 
-For client-side verification, create a class that implements `NgxSliderRecaptchaVerifier`. The `verify()` method will handle the slider movements validation.
+For client-side verification, create a class that implements `NgxSliderRecaptchaVerificationService<E extends VerificationRequest, T extends VerificationResponse>`. The `verify()` method will handle the slider movements validation.
 
 ###### Example: Client-Side Custom Verifier
 
 ```typescript
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { NgxSliderRecaptchaVerifier, VerificationResponse } from 'ngx-slider-recaptcha';
-
 @Injectable({
   providedIn: 'root'
 })
-export class CustomVerifier implements NgxSliderRecaptchaVerifier<VerificationResponse> {
-  verify(sliderMovements: number[]): Observable<VerificationResponse> {
+export class CustomNgxSliderRecaptchaVerificationService implements NgxSliderRecaptchaVerificationService<VerificationRequest, VerificationResponse> {
+  verify(verificationRequest: VerificationRequest): Observable<VerificationResponse> {
+    //Custom logic
     return of({ success: true, message: 'Verified with custom logic' });
   }
 }
 ```
+---
 
 ##### 2. Server-Side Verification
 
 For enhanced security, you can implement server-side verification to handle slider movements validation, providing further control over the process.
 
+To make the verification process more secure, you can also implement encryption and decryption. Encrypt the verification request data before sending it from the client-side and decrypt it on the server-side before processing the verification. This ensures that sensitive data is protected during transmission and reduces the risk of tampering or unauthorized access.
+
 ###### Example: Server-Side Custom Verifier 
 
 **Spring Boot Backend**
 ```java
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-import java.util.List;
-
 @RestController
+@RequestMapping("/api/slider-recaptcha")
 public class CaptchaController {
-
-    @PostMapping("/api/slider-recaptcha/verify")
-    public VerificationResponse verify(@RequestBody List<Integer> sliderMovements) {
-        List<Integer> datas = sliderMovements.chars()
-          .filter(Character::isDigit)
-          .mapToObj(c -> Character.getNumericValue(c))
-          .collect(Collectors.toList());
-  
-        double avg = datas.stream().mapToInt(Integer::intValue).average().orElse(0.0);
-        double stddev = datas.stream()
-          .mapToDouble(data -> Math.pow(data - avg, 2))
-          .average()
-          .orElse(0.0);
-
-        boolean isVerified = stddev != 0;
-
-        String secretKey = isVerified ? generateSecretKey() : null;
-        String message = isVerified ? "Verification success" : "Verification failed";
-
-        return new VerificationResponse(isVerified, secretKey, message);
+  @PostMapping("/verify")
+  public ResponseEntity<SliderRecaptchaVerificationResponse> verify(@RequestBody SliderRecaptchaVerificationRequest verificationRequest) {
+    if (ObjectUtils.isEmpty(verificationRequest)) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
-    private String generateSecretKey() {
-        return "secretKey12345"; // Example logic for generating a secret key
-    }
+    double avg = verificationRequest.getSliderMovements().stream().mapToInt(Integer::intValue).average().orElse(0);
+    double standardDeviation = verificationRequest.getSliderMovements().stream()
+      .mapToDouble(data -> Math.pow(data - avg, 2))
+      .average()
+      .orElse(0.0);
 
-    public static class VerificationResponse {
-        private boolean success;
-        private String secretKey;
-        private String message;
+    boolean isSpliced = Math.abs(verificationRequest.getPuzzleBlockPosition() - verificationRequest.getPuzzlePosition()) < verificationRequest.getToleranceOffset();
+    boolean isVerified = isSpliced && standardDeviation != 0;
 
-        public VerificationResponse(boolean success, String secretKey, String message) {
-            this.success = success;
-            this.secretKey = secretKey;
-            this.message = message;
-        }
+    SliderRecaptchaVerificationResponse verificationResponse = SliderRecaptchaVerificationResponse.builder()
+      .success(isVerified)
+      .message(isVerified ? "Verification successful" : "Verification failed")
+      .secretKey(isVerified ? generateSecretKey() : null)
+      .build();
 
-        public boolean isSuccess() { return success; }
-        public String getSecretKey() { return secretKey; }
-        public String getMessage() { return message; }
-    }
+    return ResponseEntity.ok(verificationResponse);
+  }
+
+  private String generateSecretKey() {
+    return "secretKey12345"; // Example logic for generating a secret key
+  }
 }
 ```
 
 **Frontend (Angular)**
 
 ```typescript
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { NgxSliderRecaptchaVerifier } from 'ngx-slider-recaptcha';
-import { catchError } from 'rxjs/operators';
-
 @Injectable({
   providedIn: 'root'
 })
-export class CustomVerifier implements NgxSliderRecaptchaVerifier {
-  constructor(private http: HttpClient) {}
+export class CustomNgxSliderRecaptchaVerificationService implements NgxSliderRecaptchaVerificationService<VerificationRequest, VerificationResponse> {
+  constructor(
+    private http: HttpClient,
+  ) {
+  }
 
-  verify(sliderMovements: number[]): Observable<any> {
-    return this.http.post('/api/isVerify', sliderMovements).pipe(
-      catchError(err => of({ success: false, message: 'Verification failed' }))
+  verify(verificationRequest: VerificationRequest): Observable<VerificationResponse> {
+    if (!verificationRequest?.sliderMovements?.length) {
+      return of({
+        success: false,
+        message: 'No slider movement detected. Please try again.'
+      });
+    }
+
+    return this.http.post<VerificationResponse>(
+      `${environment.baseUrl}/api/slider-recaptcha/verify`,
+      verificationRequest
+    ).pipe(
+      tap((response) => {
+        console.log('Verification successful', response);
+      }),
+      catchError((err) => {
+        console.error('Verification failed', err);
+        return of({
+          success: false,
+          message: 'Verification failed due to an error.'
+        });
+      })
     );
   }
 }
 ```
+---
 
-To use this custom verifier in the module:
+**To use this custom verification in the module:**
 
 ```typescript
-NgxSliderRecaptchaModule.forRoot({
-  verifierClass: CustomVerifier
+@NgModule({
+  imports: [
+    NgxSliderRecaptchaModule.forRoot({
+      verificationService: CustomNgxSliderRecaptchaVerificationService
+    })
+  ]
 })
+export class AppModule {}
 ```
+---
 
 ### Summary
 
@@ -467,6 +502,13 @@ NgxSliderRecaptchaModule.forRoot({
 - **Server-Side Image Retrieval**: Dynamically fetch images from a backend (e.g., Spring Boot) as Base64 or a URL.
 - **Client-Side Verification**: Implement a simple slider verification logic in the frontend.
 - **Server-Side Verification**: For enhanced security, implement slider verification on the backend to control the validation process more securely.
+
+---
+
+## Contributors
+<a href="https://github.com/mrzinkowin/ngx-slider-recaptcha/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=mrzinkowin/ngx-slider-recaptcha" />
+</a>
 
 ---
 
@@ -478,6 +520,6 @@ This project was inspired by [SliderCaptcha by ArgoZhang](https://github.com/Arg
 
 ## License
 
-MIT License. See [LICENSE](LICENSE) for more information.
+This library is distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
 ---
