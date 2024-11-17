@@ -24,6 +24,7 @@ export class NgxSliderRecaptchaComponent implements OnChanges, AfterViewInit {
   @ViewChild('slider', { static: true }) private slider!: ElementRef<HTMLElement>;
 
   @Input() config: NgxSliderRecaptchaConfig = { ...DEFAULT_SLIDER_RECAPTCHA_CONFIG };
+  @Input() disabled: boolean = false;
 
   @Output() onResolved = new EventEmitter();
   @Output() onRefresh = new EventEmitter();
@@ -60,6 +61,7 @@ export class NgxSliderRecaptchaComponent implements OnChanges, AfterViewInit {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['config']?.currentValue) {
       this._sliderConfig = { ...this._sliderConfig, ...this.globalSliderConfig, ...this.config };
+      this._sliderText = this.sliderConfig.instructionText;
       this.initializeStyles();
       this.cdr.detectChanges()
     }
@@ -140,16 +142,16 @@ export class NgxSliderRecaptchaComponent implements OnChanges, AfterViewInit {
     if (this.isVerifying || !this._isSliderDragging) return;
 
     const { x, y } = this.extractEventCoordinates(event);
-    const sliderWidth = this.sliderConfig.sliderContainerHeight!;
+    const sliderWidth = this.sliderConfig.puzzleSize! + 2;
 
     let deltaX: number = x - this.dragStartX;
     let deltaY: number = y - this.dragStartY;
-    
+
     if (deltaX < 0 || deltaX + sliderWidth > this.sliderConfig.width!) return;
 
     this._sliderOffsetX = (deltaX - 1);
     this._maskWidth = (deltaX + 4);
-    this._blockOffsetX = (this.sliderConfig.width! - 40 - 20) / (this.sliderConfig.width! - 40) * deltaX;
+    this._blockOffsetX = (this.sliderConfig.width! - this.sliderConfig.puzzleSize! - 20) / (this.sliderConfig.width! - this.sliderConfig.puzzleSize!) * deltaX;
     this.sliderMovements.push(Math.round(deltaY));
   }
 
@@ -200,10 +202,10 @@ export class NgxSliderRecaptchaComponent implements OnChanges, AfterViewInit {
 
     setTimeout(() => {
       const SLIDER_CONTAINER_MARGIN = 9;
-      this.ctx.canvas.width = this.sliderConfig.width! - 2;
-      this.ctx.canvas.height = this.sliderConfig.height! - (this.sliderConfig.sliderContainerHeight! + SLIDER_CONTAINER_MARGIN);
+      const { width, height, puzzleSize } = this.sliderConfig;
+      this.ctx.canvas.width = width! - 2;
+      this.ctx.canvas.height = height! - (puzzleSize! + SLIDER_CONTAINER_MARGIN);
     });
-
   }
 
   private initializeCaptcha() {
@@ -220,9 +222,10 @@ export class NgxSliderRecaptchaComponent implements OnChanges, AfterViewInit {
   }
 
   private configurePuzzleImage(img: HTMLImageElement): void {
-    const { width, puzzleSize, puzzleRadius, instructionText: instructionText } = this.sliderConfig;
-    var puzzleLength = puzzleSize! + puzzleRadius! * 2 + 3;
-    this.puzzleX = this.generateRandomNumber(puzzleLength + 10, width! - (puzzleLength + 10));
+    const { width, puzzleSize, puzzleRadius, instructionText } = this.sliderConfig;
+    const puzzleLength = puzzleSize! + puzzleRadius! * 2 + 3;
+    const canvasWidth = this.ctx.canvas.width - puzzleSize!;
+    this.puzzleX = this.generateRandomNumber(puzzleLength + 10, canvasWidth - (puzzleLength + 10));
     this.puzzleY = this.generateRandomNumber(10 + puzzleRadius! * 2, this.ctx.canvas.height - (puzzleLength + 10));
     this.drawPuzzlePieceShape(this.ctx, 'fill');
     this.drawPuzzlePieceShape(this.blockCtx, 'clip');
@@ -307,7 +310,7 @@ export class NgxSliderRecaptchaComponent implements OnChanges, AfterViewInit {
   }
 
   private initializeStyles(): void {
-    const { primaryColor, successColor, errorColor, textColor, sliderContainerBackgroundColor: containerBackgroundColor, sliderContainerBorderColor: containerBorderColor, borderRadius: commonBorderRadius, sliderContainerHeight } = this.sliderConfig;
+    const { primaryColor, successColor, errorColor, textColor, sliderContainerBackgroundColor: containerBackgroundColor, sliderContainerBorderColor: containerBorderColor, borderRadius: commonBorderRadius, puzzleSize } = this.sliderConfig;
     this.setStyle('--recaptcha-primary-color', primaryColor!);
     this.setStyle('--recaptcha-error-color', errorColor!);
     this.setStyle('--recaptcha-success-color', successColor!);
@@ -315,7 +318,7 @@ export class NgxSliderRecaptchaComponent implements OnChanges, AfterViewInit {
     this.setStyle('--recaptcha-container-background-color', containerBackgroundColor!);
     this.setStyle('--recaptcha-container-border-color', containerBorderColor!);
     this.setStyle('--recaptcha-common-border-radius', `${commonBorderRadius!}px`);
-    this.setStyle('--recaptcha-slider-container-height', `${sliderContainerHeight!}px`);
+    this.setStyle('--recaptcha-slider-container-height', `${puzzleSize!}px`);
     this.setStyle('--recaptcha-slider-mask-primary-color', this.hexToRgba(primaryColor!, 0.3));
     this.setStyle('--recaptcha-slider-mask-success-color', this.hexToRgba(successColor!, 0.3));
     this.setStyle('--recaptcha-slider-mask-error-color', this.hexToRgba(errorColor!, 0.3));

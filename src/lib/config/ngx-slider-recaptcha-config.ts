@@ -3,7 +3,6 @@ export interface NgxSliderRecaptchaConfig {
     height?: number;
     puzzleSize?: number;
     puzzleRadius?: number;
-    sliderContainerHeight?: number;
 
     primaryColor?: string;
     errorColor?: string;

@@ -3,9 +3,8 @@ import { NgxSliderRecaptchaConfig } from "./ngx-slider-recaptcha-config";
 export const DEFAULT_SLIDER_RECAPTCHA_CONFIG: NgxSliderRecaptchaConfig = {
     width: 300,
     height: 200,
-    puzzleSize: 42,
-    puzzleRadius: 9,
-    sliderContainerHeight: 40,
+    puzzleSize: 45,
+    puzzleRadius: 10,
     
     toleranceOffset: 5,
     maxRetryAttempts: 3,

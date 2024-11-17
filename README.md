@@ -119,7 +119,6 @@ export const DEFAULT_SLIDER_RECAPTCHA_CONFIG: NgxSliderRecaptchaConfig = {
   height: 200,
   puzzleSize: 42,
   puzzleRadius: 9,
-  sliderContainerHeight: 40,
 
   toleranceOffset: 5,
   maxRetryAttempts: 3,
@@ -143,12 +142,11 @@ export const DEFAULT_SLIDER_RECAPTCHA_CONFIG: NgxSliderRecaptchaConfig = {
 #### Slider reCAPTCHA Configuration Options
 
 | **Property**                     | **Type**            | **Default**  | **Description**                                                  |
-|-----------------------------------|---------------------|--------------|------------------------------------------------------------------|
+|-----------------------------------|---------------------|--------------|-----------------------------------------------------------------|
 | `width`                          | `number`            | `300`        | Width of the slider reCAPTCHA container in pixels.               |
 | `height`                         | `number`            | `200`        | Height of the slider reCAPTCHA container in pixels.              |
 | `puzzleSize`                     | `number`            | `40`         | Size of the puzzle piece in pixels.                              |
 | `puzzleRadius`                   | `number`            | `5`          | Radius of the puzzle piece.                                      |
-| `sliderContainerHeight`          | `number`            | `40`         | Height of the slider container.                                  |
 | `toleranceOffset`                | `number`            | `5`          | Allowable deviation for successful verification in pixels.       |
 | `maxRetryAttempts`               | `number`            | `3`          | Maximum number of retry attempts allowed for image retrieval.    |
 | `allowRefresh`                   | `boolean`           | `false`      | Determines if the slider reCAPTCHA can be refreshed by the user. |
@@ -159,8 +157,8 @@ export const DEFAULT_SLIDER_RECAPTCHA_CONFIG: NgxSliderRecaptchaConfig = {
 | `sliderContainerBackgroundColor` | `string`            | `"#f7f9fa"`  | Background color of the slider container.                        |
 | `sliderContainerBorderColor`     | `string`            | `"#e6e8eb"`  | Border color of the slider container.                            |
 | `borderRadius`                   | `number`            | `4`          | Border radius for the slider and container elements.             |
-| `loadingText`                    | `string`            | `"Loading..."` | Message shown while loading.                                     |
-| `instructionText`                | `string`            | `"Slide to complete the puzzle"` | Text providing instructions to users.                            |
+| `loadingText`                    | `string`            | `"Loading..."` | Message shown while loading.                                   |
+| `instructionText`                | `string`            | `"Slide to complete the puzzle"` | Text providing instructions to users.        |
 
 ---
 

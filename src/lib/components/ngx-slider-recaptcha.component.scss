@@ -142,10 +142,18 @@
   transition: color 0.3s linear;
 }
 
-.refresh-icon::before{
+.refresh-icon::before {
   content: '\27F3';
 }
 
 .refresh-icon:hover {
   color: #fff;
+}
+
+
+.disable-wrapper {
+  position: absolute;
+  cursor: not-allowed;
+  z-index: 9999;
+  background-color: rgba(225, 225, 225, 0.3);
 }
