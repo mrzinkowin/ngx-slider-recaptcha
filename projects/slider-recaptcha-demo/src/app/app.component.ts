@@ -16,6 +16,7 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 export class AppComponent implements OnInit {
   title = 'slider-recaptcha-demo';
   config!: NgxSliderRecaptchaConfig;
+  disabled: boolean = false;
 
   ngOnInit(): void {
     this.config = { ...DEFAULT_SLIDER_RECAPTCHA_CONFIG };

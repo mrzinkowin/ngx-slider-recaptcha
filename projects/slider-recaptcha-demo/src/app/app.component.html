@@ -143,9 +143,18 @@
                     </nz-form-control>
                 </nz-form-item>
             </div>
+
+            <div class="col-sm-3">
+                <nz-form-item>
+                    <nz-form-label nzFor="disabled">Disabled the slider reCAPTCHA</nz-form-label>
+                    <nz-form-control>
+                        <label nz-checkbox name="disabled" [(ngModel)]="disabled">{{ disabled ? 'Yes' : 'No'}}</label>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
         </div>
     </form>
 
-    <ngx-slider-recaptcha [config]="config" (onResolved)="onResolved($event)" (onError)="onError($event)"
+    <ngx-slider-recaptcha [config]="config" [disabled]="disabled" (onResolved)="onResolved($event)" (onError)="onError($event)"
         (onRefresh)="onRefresh()"></ngx-slider-recaptcha>
 </div>
