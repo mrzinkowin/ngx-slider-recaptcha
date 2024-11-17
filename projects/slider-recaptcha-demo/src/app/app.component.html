@@ -77,6 +77,54 @@
 
             <div class="col-sm-3">
                 <nz-form-item>
+                    <nz-form-label nzFor="width">Width</nz-form-label>
+                    <nz-form-control nzErrorTip="Please input width">
+                        <nz-input-group>
+                            <input name="width" [(ngModel)]="config.width" nz-input type="number"
+                                placeholder="Width" (input)="onChangedSize()" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <div class="col-sm-3">
+                <nz-form-item>
+                    <nz-form-label nzFor="height">Height</nz-form-label>
+                    <nz-form-control nzErrorTip="Please input height">
+                        <nz-input-group>
+                            <input name="height" [(ngModel)]="config.height" nz-input type="number"
+                                placeholder="Height" (input)="onChangedSize()" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+            
+            <div class="col-sm-3">
+                <nz-form-item>
+                    <nz-form-label nzFor="puzzleSize">Puzzle Size</nz-form-label>
+                    <nz-form-control nzErrorTip="Please input puzzle size">
+                        <nz-input-group>
+                            <input name="puzzleSize" [(ngModel)]="config.puzzleSize" nz-input type="number"
+                                placeholder="Puzzle size" (input)="onChangedSize()" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <div class="col-sm-3">
+                <nz-form-item>
+                    <nz-form-label nzFor="puzzleSize">Puzzle radius</nz-form-label>
+                    <nz-form-control nzErrorTip="Please input puzzle radius">
+                        <nz-input-group>
+                            <input name="puzzleRadius" [(ngModel)]="config.puzzleRadius" nz-input type="number"
+                                placeholder="Puzzle radius" (input)="onChangedSize()" />
+                        </nz-input-group>
+                    </nz-form-control>
+                </nz-form-item>
+            </div>
+
+            <div class="col-sm-3">
+                <nz-form-item>
                     <nz-form-label nzFor="borderRadius">Border Radius</nz-form-label>
                     <nz-form-control nzErrorTip="Please input border radius">
                         <nz-input-group>
@@ -155,6 +203,6 @@
         </div>
     </form>
 
-    <ngx-slider-recaptcha [config]="config" [disabled]="disabled" (onResolved)="onResolved($event)" (onError)="onError($event)"
+    <ngx-slider-recaptcha #sliderRecaptchaRef [config]="config" [disabled]="disabled" (onResolved)="onResolved($event)" (onError)="onError($event)"
         (onRefresh)="onRefresh()"></ngx-slider-recaptcha>
 </div>

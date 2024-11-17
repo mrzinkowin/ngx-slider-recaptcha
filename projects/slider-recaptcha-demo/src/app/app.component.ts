@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { DEFAULT_SLIDER_RECAPTCHA_CONFIG, NgxSliderRecaptchaConfig, NgxSliderRecaptchaModule, VerificationResponse } from '@ngx-slider-recaptcha';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { DEFAULT_SLIDER_RECAPTCHA_CONFIG, NgxSliderRecaptchaComponent, NgxSliderRecaptchaConfig, NgxSliderRecaptchaModule, VerificationResponse } from '@ngx-slider-recaptcha';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { CommonModule } from '@angular/common';
@@ -17,6 +17,8 @@ export class AppComponent implements OnInit {
   title = 'slider-recaptcha-demo';
   config!: NgxSliderRecaptchaConfig;
   disabled: boolean = false;
+
+  @ViewChild('sliderRecaptchaRef', { static: false }) sliderRecaptcha!: NgxSliderRecaptchaComponent;
 
   ngOnInit(): void {
     this.config = { ...DEFAULT_SLIDER_RECAPTCHA_CONFIG };
@@ -36,6 +38,10 @@ export class AppComponent implements OnInit {
 
   onChanged(): void {
     this.config = { ...this.config };
-    console.log(this.config);
+  }
+
+  onChangedSize(): void {
+    this.config = { ...this.config };
+    this.sliderRecaptcha.reset();
   }
 }
