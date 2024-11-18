@@ -13,7 +13,7 @@ export class AppComponent {
   title = 'slider-recaptcha-custom-demo';
   config: NgxSliderRecaptchaConfig = {};
 
-  onResolved(response: VerificationResponse): void {
+  onVerified(response: VerificationResponse): void {
     alert(response.message)
     this.config = { ...this.config, allowRefresh: true };
   }

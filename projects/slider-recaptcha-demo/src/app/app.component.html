@@ -203,6 +203,6 @@
         </div>
     </form>
 
-    <ngx-slider-recaptcha #sliderRecaptchaRef [config]="config" [disabled]="disabled" (onResolved)="onResolved($event)" (onError)="onError($event)"
+    <ngx-slider-recaptcha #sliderRecaptchaRef [config]="config" [disabled]="disabled" (onVerified)="onVerified($event)" (onError)="onError($event)"
         (onRefresh)="onRefresh()"></ngx-slider-recaptcha>
 </div>

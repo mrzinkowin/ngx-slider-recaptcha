@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
     this.config = { ...DEFAULT_SLIDER_RECAPTCHA_CONFIG };
   }
 
-  onResolved(response: VerificationResponse): void {
+  onVerified (response: VerificationResponse): void {
     alert(response.message)
   }
 

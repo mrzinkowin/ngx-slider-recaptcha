@@ -76,14 +76,14 @@ export class AppModule {}
 2. **Add** `<ngx-slider-recaptcha></ngx-slider-recaptcha>` in your template:
 
 ```html
-<ngx-slider-recaptcha (onResolved)="onResolved($event)"></ngx-slider-recaptcha>
+<ngx-slider-recaptcha (onVerified)="onVerified($event)"></ngx-slider-recaptcha>
 ```
 
 3. **Handle** the verification event in your component:
 
 ```typescript
 export class AppComponent {
-  onResolved(event: VerificationResponse): void {
+  onVerified(event: VerificationResponse): void {
     if (event.success) {
       console.log('Verification successful');
     } else {
@@ -196,7 +196,7 @@ Example of instance-level configuration in the template:
     width: 300,
     height: 140,
   }"
-  (onResolved)="onResolved($event)"
+  (onVerified)="onVerified($event)"
 ></ngx-slider-recaptcha>
 ```
 

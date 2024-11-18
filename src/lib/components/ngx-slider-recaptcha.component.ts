@@ -26,7 +26,7 @@ export class NgxSliderRecaptchaComponent implements OnChanges, AfterViewInit {
   @Input() config: NgxSliderRecaptchaConfig = { ...DEFAULT_SLIDER_RECAPTCHA_CONFIG };
   @Input() disabled: boolean = false;
 
-  @Output() onResolved = new EventEmitter();
+  @Output() onVerified = new EventEmitter<VerificationResponse>();
   @Output() onRefresh = new EventEmitter();
   @Output() onError = new EventEmitter();
 
@@ -75,13 +75,14 @@ export class NgxSliderRecaptchaComponent implements OnChanges, AfterViewInit {
   }
 
   reset() {
-    this._sliderOffsetX = 0;
     this._maskWidth = 0;
-    this.renderer.setStyle(this.block.nativeElement, 'left', 0);
+    this._sliderOffsetX = 0;
+    this._blockOffsetX = 0;
     this.sliderMovements = [];
     this._verificationStatus = 'none';
     this._sliderText = this.sliderConfig.loadingText!;
     this.resetCanvas();
+    this.initializeCanvasContexts();
     this.renderPuzzle();
   }
 
@@ -177,7 +178,7 @@ export class NgxSliderRecaptchaComponent implements OnChanges, AfterViewInit {
         this._isVerifying = false;
         if (response.success) {
           this._verificationStatus = 'success';
-          this.onResolved.emit(response);
+          this.onVerified.emit(response);
         } else {
           this._verificationStatus = 'fail';
           this.onError.emit("Verification failed");
