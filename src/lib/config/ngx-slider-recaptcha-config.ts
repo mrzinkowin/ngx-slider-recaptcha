@@ -15,6 +15,7 @@ export interface NgxSliderRecaptchaConfig {
     toleranceOffset?: number;
     maxRetryAttempts?: number;
     allowRefresh?: boolean;
+    allowResponsiveWidth?: boolean;
 
     loadingText?: string;
     instructionText?: string;

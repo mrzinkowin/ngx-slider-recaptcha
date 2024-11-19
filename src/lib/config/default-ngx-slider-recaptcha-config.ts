@@ -9,6 +9,7 @@ export const DEFAULT_SLIDER_RECAPTCHA_CONFIG: NgxSliderRecaptchaConfig = {
     toleranceOffset: 5,
     maxRetryAttempts: 3,
     allowRefresh: false,
+    allowResponsiveWidth: false,
 
     primaryColor: '#0083c1',
     errorColor: '#c4161c',
