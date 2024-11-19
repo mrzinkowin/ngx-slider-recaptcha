@@ -5,13 +5,14 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @Component({
   standalone: true,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [CommonModule, FormsModule, NzFormModule, NzInputModule, NzCheckboxModule, NgxSliderRecaptchaModule]
+  imports: [CommonModule, FormsModule, NzFormModule, NzInputModule, NzCheckboxModule, NzButtonModule, NgxSliderRecaptchaModule]
 })
 export class AppComponent implements OnInit {
   title = 'slider-recaptcha-demo';
@@ -24,7 +25,7 @@ export class AppComponent implements OnInit {
     this.config = { ...DEFAULT_SLIDER_RECAPTCHA_CONFIG };
   }
 
-  onVerified (response: VerificationResponse): void {
+  onVerified(response: VerificationResponse): void {
     alert(response.message)
   }
 

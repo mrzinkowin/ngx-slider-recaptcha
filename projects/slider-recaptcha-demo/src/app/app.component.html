@@ -1,4 +1,4 @@
-<div style="padding: 20px;">
+<div class="container p-3">
     <form nz-form nzLayout="vertical">
         <div class="row">
             <div class="col-sm-3">
@@ -80,8 +80,8 @@
                     <nz-form-label nzFor="width">Width</nz-form-label>
                     <nz-form-control nzErrorTip="Please input width">
                         <nz-input-group>
-                            <input name="width" [(ngModel)]="config.width" nz-input type="number"
-                                placeholder="Width" (input)="onChangedSize()" />
+                            <input name="width" [(ngModel)]="config.width" nz-input type="number" placeholder="Width"
+                                (input)="onChangedSize()" />
                         </nz-input-group>
                     </nz-form-control>
                 </nz-form-item>
@@ -92,13 +92,13 @@
                     <nz-form-label nzFor="height">Height</nz-form-label>
                     <nz-form-control nzErrorTip="Please input height">
                         <nz-input-group>
-                            <input name="height" [(ngModel)]="config.height" nz-input type="number"
-                                placeholder="Height" (input)="onChangedSize()" />
+                            <input name="height" [(ngModel)]="config.height" nz-input type="number" placeholder="Height"
+                                (input)="onChangedSize()" />
                         </nz-input-group>
                     </nz-form-control>
                 </nz-form-item>
             </div>
-            
+
             <div class="col-sm-3">
                 <nz-form-item>
                     <nz-form-label nzFor="puzzleSize">Puzzle Size</nz-form-label>
@@ -187,7 +187,8 @@
                 <nz-form-item>
                     <nz-form-label nzFor="allowRefresh">Allow Refresh</nz-form-label>
                     <nz-form-control>
-                        <label nz-checkbox name="allowRefresh" [(ngModel)]="config.allowRefresh" (ngModelChange)="onChanged()">{{ config.allowRefresh ? 'Yes' : 'No'}}</label>
+                        <label nz-checkbox name="allowRefresh" [(ngModel)]="config.allowRefresh"
+                            (ngModelChange)="onChanged()">{{ config.allowRefresh ? 'Yes' : 'No'}}</label>
                     </nz-form-control>
                 </nz-form-item>
             </div>
@@ -196,7 +197,8 @@
                 <nz-form-item>
                     <nz-form-label nzFor="allowResponsiveWidth">Allow Responsive Width</nz-form-label>
                     <nz-form-control>
-                        <label nz-checkbox name="allowResponsiveWidth" [(ngModel)]="config.allowResponsiveWidth" (ngModelChange)="onChangedSize()">{{ config.allowResponsiveWidth ? 'Yes' : 'No'}}</label>
+                        <label nz-checkbox name="allowResponsiveWidth" [(ngModel)]="config.allowResponsiveWidth"
+                            (ngModelChange)="onChangedSize()">{{ config.allowResponsiveWidth ? 'Yes' : 'No'}}</label>
                     </nz-form-control>
                 </nz-form-item>
             </div>
@@ -210,10 +212,19 @@
                 </nz-form-item>
             </div>
 
-            <button (click)="sliderRecaptcha.reset()">Reset</button>
+            <button nz-button nzType="primary" nzShape="round" (click)="sliderRecaptcha.reset()">
+                <span nz-icon nzType="download">Reset</span>
+            </button>
         </div>
     </form>
 
-    <ngx-slider-recaptcha #sliderRecaptchaRef [config]="config" [disabled]="disabled" (onVerified)="onVerified($event)" (onError)="onError($event)"
-        (onRefresh)="onRefresh()"></ngx-slider-recaptcha>
+    <div class="container mt-3 mb-3">
+        <div class="row justify-content-center">
+            <div style="width: 400px; height: 300px;">
+                <ngx-slider-recaptcha #sliderRecaptchaRef [config]="config" [disabled]="disabled"
+                    (onVerified)="onVerified($event)" (onError)="onError($event)"
+                    (onRefresh)="onRefresh()"></ngx-slider-recaptcha>
+            </div>
+        </div>
+    </div>
 </div>
