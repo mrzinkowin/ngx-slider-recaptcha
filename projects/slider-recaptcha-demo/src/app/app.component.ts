@@ -6,13 +6,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 
 @Component({
   standalone: true,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [CommonModule, FormsModule, NzFormModule, NzInputModule, NzCheckboxModule, NzButtonModule, NgxSliderRecaptchaModule]
+  imports: [CommonModule, FormsModule, NzFormModule, NzInputModule, NzCheckboxModule, NzButtonModule, NgxSliderRecaptchaModule,NzDividerModule]
 })
 export class AppComponent implements OnInit {
   title = 'slider-recaptcha-demo';
@@ -39,9 +40,11 @@ export class AppComponent implements OnInit {
 
   onChanged(): void {
     this.config = { ...this.config };
+    console.log('asd');
   }
 
   onChangedSize(): void {
+    console.log('onChangedSize', this.config.width);
     this.config = { ...this.config };
     this.sliderRecaptcha.reset();
   }
