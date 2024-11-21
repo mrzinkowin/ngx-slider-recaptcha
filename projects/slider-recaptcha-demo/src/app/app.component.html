@@ -1,10 +1,9 @@
 <div class="main-wrapper">
     <div style="width: 500px;display: block;text-align: center;">
         <ngx-slider-recaptcha #sliderRecaptchaRef [config]="config" [disabled]="disabled"
-        (onVerified)="onVerified($event)" (onError)="onError($event)" [sliderRender]="'test'"
-        (onRefresh)="onRefresh()"></ngx-slider-recaptcha>
+            (onVerified)="onVerified($event)" (onError)="onError($event)"
+            (onRefresh)="onRefresh()"></ngx-slider-recaptcha>
     </div>
-    <ng-template #test>a</ng-template>
     <nz-divider></nz-divider>
     <div class="row">
 
@@ -17,7 +16,7 @@
                             <nz-input-group>
                                 <input class="color-picker" name="primaryColor" [(ngModel)]="config.primaryColor"
                                     nz-input type="color" placeholder="Primary color" (input)="onChanged()" />
-                                    <span>{{config.primaryColor}}</span>
+                                <span>{{config.primaryColor}}</span>
                             </nz-input-group>
                         </nz-form-control>
                     </nz-form-item>
@@ -232,9 +231,6 @@
                 (click)="sliderRecaptcha.reset()">
                 <span nz-icon nzType="download">Reset</span>
             </button>
-            <!-- <button nz-button nzType="primary" nzShape="round">
-                <span nz-icon nzType="download">Reset Style</span>
-            </button> -->
         </form>
     </div>
 </div>
