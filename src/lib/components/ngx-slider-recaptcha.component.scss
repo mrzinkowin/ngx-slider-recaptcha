@@ -30,6 +30,11 @@
   .slider-text {
       position: relative;
       color: var(--recaptcha-text-color);
+      white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding-left: calc(var(--recaptcha-slider-container-height) + 10px);
+    padding-right: 10px;
   }
 
   .slider-mask {
