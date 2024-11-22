@@ -1,1 +1,239 @@
-<ngx-slider-recaptcha [config]="config" (onResolved)="onResolved($event)" (onError)="onError($event)" (onRefresh)="onRefresh()"></ngx-slider-recaptcha>
+<div class="main-wrapper">
+    <div style="width: 500px;display: block;text-align: center;">
+        <ngx-slider-recaptcha #sliderRecaptchaRef [config]="config" [disabled]="disabled"
+        (onVerified)="onVerified($event)" (onError)="onError($event)" [sliderRender]="customSliderIcon"
+        (onRefresh)="onRefresh()"></ngx-slider-recaptcha>
+    </div>
+    <ng-template #customSliderIcon>
+        <i class="fa fa-arrow-right"></i>
+    </ng-template>
+    <nz-divider></nz-divider>
+    <div class="row">
+
+        <form nz-form nzLayout="vertical">
+            <div class="row">
+                <div class="color-picker-form-gp">
+                    <nz-form-item>
+                        <nz-form-label nzFor="primaryColor">Primary Color</nz-form-label>
+                        <nz-form-control nzErrorTip="Please input primary color">
+                            <nz-input-group>
+                                <input class="color-picker" name="primaryColor" [(ngModel)]="config.primaryColor"
+                                    nz-input type="color" placeholder="Primary color" (input)="onChanged()" />
+                                    <span>{{config.primaryColor}}</span>
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+
+                <div class="color-picker-form-gp">
+                    <nz-form-item>
+                        <nz-form-label nzFor="errorColor">Error Color</nz-form-label>
+                        <nz-form-control nzErrorTip="Please input error color">
+                            <nz-input-group>
+                                <input class="color-picker" name="errorColor" [(ngModel)]="config.errorColor" nz-input
+                                    type="color" placeholder="Error color" (input)="onChanged()" />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+
+                <div class="color-picker-form-gp">
+                    <nz-form-item>
+                        <nz-form-label nzFor="successColor">Success Color</nz-form-label>
+                        <nz-form-control nzErrorTip="Please input success color">
+                            <nz-input-group>
+                                <input class="color-picker" name="successColor" [(ngModel)]="config.successColor"
+                                    nz-input type="color" placeholder="Success color" (input)="onChanged()" />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+
+                <div class="color-picker-form-gp">
+                    <nz-form-item>
+                        <nz-form-label nzFor="textColor">Text Color</nz-form-label>
+                        <nz-form-control nzErrorTip="Please input text color">
+                            <nz-input-group>
+                                <input class="color-picker" name="textColor" [(ngModel)]="config.textColor" nz-input
+                                    type="color" placeholder="Text color" (input)="onChanged()" />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+
+                <div class="color-picker-form-gp-lg">
+                    <nz-form-item>
+                        <nz-form-label nzFor="sliderContainerBackgroundColor">Slider Container Background
+                            Color</nz-form-label>
+                        <nz-form-control nzErrorTip="Please input slider container background color">
+                            <nz-input-group>
+                                <input class="color-picker" name="sliderContainerBackgroundColor"
+                                    [(ngModel)]="config.sliderContainerBackgroundColor" nz-input type="color"
+                                    placeholder="Background color" (input)="onChanged()" />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+
+                <div class="color-picker-form-gp-lg">
+                    <nz-form-item>
+                        <nz-form-label nzFor="sliderContainerBorderColor">Slider Container Border Color</nz-form-label>
+                        <nz-form-control nzErrorTip="Please input slider container border color">
+                            <nz-input-group>
+                                <input class="color-picker" name="sliderContainerBorderColor"
+                                    [(ngModel)]="config.sliderContainerBorderColor" nz-input type="color"
+                                    placeholder="Border color" (input)="onChanged()" />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="text-form-gp">
+                    <nz-form-item>
+                        <nz-form-label nzFor="width">Width</nz-form-label>
+                        <nz-form-control nzErrorTip="Please input width">
+                            <nz-input-group>
+                                <input name="width" [(ngModel)]="config.width" nz-input type="number"
+                                    placeholder="Width" (input)="onChangedSize()" />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+
+                <div class="text-form-gp">
+                    <nz-form-item>
+                        <nz-form-label nzFor="height">Height</nz-form-label>
+                        <nz-form-control nzErrorTip="Please input height">
+                            <nz-input-group>
+                                <input name="height" [(ngModel)]="config.height" nz-input type="number"
+                                    placeholder="Height" (input)="onChangedSize()" />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+
+                <div class="text-form-gp">
+                    <nz-form-item>
+                        <nz-form-label nzFor="puzzleSize">Puzzle Size</nz-form-label>
+                        <nz-form-control nzErrorTip="Please input puzzle size">
+                            <nz-input-group>
+                                <input name="puzzleSize" [(ngModel)]="config.puzzleSize" nz-input type="number"
+                                    placeholder="Puzzle size" (input)="onChangedSize()" />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+
+                <div class="text-form-gp">
+                    <nz-form-item>
+                        <nz-form-label nzFor="puzzleSize">Puzzle radius</nz-form-label>
+                        <nz-form-control nzErrorTip="Please input puzzle radius">
+                            <nz-input-group>
+                                <input name="puzzleRadius" [(ngModel)]="config.puzzleRadius" nz-input type="number"
+                                    placeholder="Puzzle radius" (input)="onChangedSize()" />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+
+                <div class="text-form-gp">
+                    <nz-form-item>
+                        <nz-form-label nzFor="borderRadius">Border Radius</nz-form-label>
+                        <nz-form-control nzErrorTip="Please input border radius">
+                            <nz-input-group>
+                                <input name="borderRadius" [(ngModel)]="config.borderRadius" nz-input type="number"
+                                    placeholder="Border radius" (input)="onChanged()" />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+
+                <div class="text-form-gp-md">
+                    <nz-form-item>
+                        <nz-form-label nzFor="toleranceOffset">Tolerance Offset</nz-form-label>
+                        <nz-form-control nzErrorTip="Please input tolerance offset">
+                            <nz-input-group>
+                                <input name="toleranceOffset" [(ngModel)]="config.toleranceOffset" nz-input
+                                    type="number" placeholder="Tolerance offset" (input)="onChanged()" />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+
+                <div class="text-form-gp-lg">
+                    <nz-form-item>
+                        <nz-form-label nzFor="maxRetryAttempts">Max Retry Attempts</nz-form-label>
+                        <nz-form-control nzErrorTip="Please input max retry attempts">
+                            <nz-input-group>
+                                <input name="maxRetryAttempts" [(ngModel)]="config.maxRetryAttempts" nz-input
+                                    type="number" placeholder="Max retry attempts" (input)="onChanged()" />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </div>
+            <div class="row">
+                <div class="text-form-gp-xl">
+                    <nz-form-item>
+                        <nz-form-label nzFor="instructionText">Instruction Text</nz-form-label>
+                        <nz-form-control nzErrorTip="Please input instruction text">
+                            <nz-input-group>
+                                <input name="instructionText" [(ngModel)]="config.instructionText" nz-input
+                                    placeholder="Instruction text" (input)="onChanged()" />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+
+                <div class="text-form-gp-xl">
+                    <nz-form-item>
+                        <nz-form-label nzFor="loadingText">Loading Text</nz-form-label>
+                        <nz-form-control nzErrorTip="Please input loading text">
+                            <nz-input-group>
+                                <input name="loadingText" [(ngModel)]="config.loadingText" nz-input
+                                    placeholder="Loading text" (input)="onChanged()" />
+                            </nz-input-group>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </div>
+            <div class="row">
+                <div class="check-form-gp">
+                    <nz-form-item>
+                        <nz-form-label nzFor="allowRefresh">Allow Refresh</nz-form-label>
+                        <nz-form-control>
+                            <label nz-checkbox name="allowRefresh" [(ngModel)]="config.allowRefresh"
+                                (ngModelChange)="onChanged()">{{ config.allowRefresh ? 'Yes' : 'No'}}</label>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+                <div class="check-form-gp-md">
+                    <nz-form-item>
+                        <nz-form-label nzFor="allowResponsiveWidth">Allow Responsive Width</nz-form-label>
+                        <nz-form-control>
+                            <label nz-checkbox name="allowResponsiveWidth" [(ngModel)]="config.allowResponsiveWidth"
+                                (ngModelChange)="onChangedSize()">{{ config.allowResponsiveWidth ? 'Yes' :
+                                'No'}}</label>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+
+                <div class="check-form-gp-lg">
+                    <nz-form-item>
+                        <nz-form-label nzFor="disabled">Disabled the slider reCAPTCHA</nz-form-label>
+                        <nz-form-control>
+                            <label nz-checkbox name="disabled" [(ngModel)]="disabled">{{ disabled ? 'Yes' :
+                                'No'}}</label>
+                        </nz-form-control>
+                    </nz-form-item>
+                </div>
+            </div>
+            <button nz-button style="margin-right: 15px;" nzType="primary" nzShape="round"
+                (click)="sliderRecaptcha.reset()">
+                <span nz-icon nzType="download">Reset</span>
+            </button>
+        </form>
+    </div>
+</div>

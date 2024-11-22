@@ -65,7 +65,9 @@
               }
             ],
             "styles": [
-              "projects/slider-recaptcha-demo/src/styles.scss"
+              "projects/slider-recaptcha-demo/src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
             ],
             "scripts": []
           },
@@ -133,7 +135,9 @@
               "projects/slider-recaptcha-demo/src/assets"
             ],
             "styles": [
-              "projects/slider-recaptcha-demo/src/styles.scss"
+              "projects/slider-recaptcha-demo/src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css"
             ],
             "scripts": []
           }
@@ -170,7 +174,10 @@
               }
             ],
             "styles": [
-              "projects/slider-recaptcha-custom-demo/src/styles.scss"
+              "projects/slider-recaptcha-custom-demo/src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/ng-zorro-antd/ng-zorro-antd.min.css",
+              "node_modules/font-awesome/css/font-awesome.css"
             ],
             "scripts": []
           },
