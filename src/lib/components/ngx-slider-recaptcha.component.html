@@ -1,4 +1,4 @@
-<div #captchaContainer class="captcha-container" [style.width.px]="!config.allowResponsiveWidth ? sliderConfig.width : null" [style.height.px]="sliderConfig.height">
+<div #captchaContainer class="captcha-container">
     <canvas #canvas class="canvas"></canvas>
     <canvas #block class="block" [style.left.px]="blockOffsetX"></canvas>
     <div class="slider-container" [class.active]="isSliderDragging" [class.success]="verificationStatus === 'success'" [class.fail]="verificationStatus === 'fail'">
