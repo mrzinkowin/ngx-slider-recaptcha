@@ -2,7 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
-This project adheres to [Semantic Versioning](https://semver.org/) and follows the format based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
+## [1.0.3-beta](https://github.com/mrzinkowin/ngx-slider-recaptcha/releases/tag/v1.0.3-beta) - 2024-11-25
+
+### Fixed
+- Resolved canvas rendering issues when the width and height were updated.
+- Fixed slider container text bug.
+
+### Enhancements
+- Updated the Custom Demo UI with customizable features.
+- Enhanced the demo app with dynamic config changes and cleaned up unused config values.
+- Adjusted the canvas height by subtracting the slider container height, and set the puzzle block height to match the canvas height.
+- Added template rendering and responsive width to the slider component.
+- Added a "disable" feature to allow disabling the slider component for use cases requiring the reCAPTCHA to be inactive.
+
+### Refactoring
+- Renamed event from `onResolved` to `onVerified` for clarity.
+- Improved naming conventions for clarity and consistency.
+- Removed unnecessary Font Awesome styles and fonts.
+
+### Configuration
+- Added `@ngx-slider-recaptcha` path alias to `tsconfig` for the source entry point.
+
 
 ## [1.0.2](https://github.com/mrzinkowin/ngx-slider-recaptcha/releases/tag/v1.0.2) - 2024-11-12
 
