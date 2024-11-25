@@ -175,6 +175,8 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
   private onDragEnd(event: MouseEvent | TouchEvent): void {
     if (this.isVerifying || !this._isSliderDragging) return;
     this._isSliderDragging = false;
+    console.log(event);
+    console.log((event as TouchEvent).touches);
     const { x } = this.extractEventCoordinates(event);
     if (x === this.dragStartX) return;
 
@@ -326,7 +328,7 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
     if (event instanceof MouseEvent) {
       return { x: event.clientX, y: event.clientY };
     } else {
-      return { x: event.touches[0].clientX, y: event.touches[0].clientY };
+      return { x: event.changedTouches[0].clientX, y: event.changedTouches[0].clientY };
     }
   }
 

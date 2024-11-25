@@ -1,6 +1,6 @@
 {
   "name": "ngx-slider-recaptcha",
-  "version": "1.0.2",
+  "version": "1.1.0-beta",
   "description": "Angular slider with reCAPTCHA verification",
   "license": "MIT",
   "scripts": {
@@ -10,6 +10,8 @@
     "start:custom-demo": "ng serve slider-recaptcha-custom-demo",
     "build": "ng build",
     "build:lib": "ng build ngx-slider-recaptcha",
+    "build:custom-demo": "ng build slider-recaptcha-custom-demo --base-href https://mrzinkowin.github.io/ngx-slider-recaptcha/",
+    "deploy:custom-demo": "npm run build:custom-demo && angular-cli-ghpages --dir=dist/slider-recaptcha-custom-demo",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "publish:lib": "npm run build:lib && cd dist/ngx-slider-recaptcha && npm publish --access public"
@@ -24,13 +26,27 @@
   },
   "keywords": [
     "angular",
+    "angular-library",
     "slider",
     "captcha",
     "recaptcha",
-    "slider recaptcha"
+    "slider-captcha",
+    "slider-recaptcha",
+    "captcha-library",
+    "reCAPTCHA-verification",
+    "drag-and-drop-captcha",
+    "slider-validation",
+    "ng-recaptcha",
+    "angular-captcha",
+    "angular-slider-captcha",
+    "angular-slider-library"
   ],
   "bugs": {
     "url": "https://github.com/mrzinkowin/ngx-slider-recaptcha/issues"
+  },
+  "peerDependencies": {
+    "@angular/common": "^14.0.0",
+    "@angular/core": "^14.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.1.3",
@@ -45,6 +61,7 @@
     "@angular/platform-browser-dynamic": "^14.1.0",
     "@angular/router": "^14.1.0",
     "@types/jasmine": "~4.0.0",
+    "angular-cli-ghpages": "^2.0.3",
     "bootstrap": "^5.3.3",
     "font-awesome": "^4.7.0",
     "jasmine-core": "~4.2.0",
