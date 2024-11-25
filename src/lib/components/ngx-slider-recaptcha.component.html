@@ -1,4 +1,4 @@
-<div #captchaContainer class="captcha-container" [style.width.px]="!config.allowResponsiveWidth ? sliderConfig.width : null" [style.height.px]="sliderConfig.height">
+<div #captchaContainer class="captcha-container">
     <canvas #canvas class="canvas"></canvas>
     <canvas #block class="block" [style.left.px]="blockOffsetX"></canvas>
     <div class="slider-container" [class.active]="isSliderDragging" [class.success]="verificationStatus === 'success'" [class.fail]="verificationStatus === 'fail'">
@@ -20,5 +20,5 @@
         <span class="slider-text" *ngIf="!isVerifying">{{ sliderText }}</span>
     </div>
     <i *ngIf="sliderConfig.allowRefresh" class="refresh-icon" (click)="refresh()"></i>
-    <div class="disable-wrapper" *ngIf="disabled || isVerifying" [style.width.px]="sliderConfig.width"  [style.height.px]="sliderConfig.height"></div>
+    <div class="disable-wrapper" *ngIf="isDisabled || isVerifying"></div>
 </div>

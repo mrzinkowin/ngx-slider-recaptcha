@@ -17,6 +17,8 @@ Ngx Slider reCAPTCHA is a customizable Angular library that provides a slider-ba
 
 - [Features](#features)
 - [Demo](#demo)
+  - [GitHub Pages Demo](#github-pages-demo)
+    - [Ngx Slider reCAPTCHA Custom Demo](https://mrzinkowin.github.io/ngx-slider-recaptcha)
   - [StackBlitz Demo](#stackblitz-demo)
     - [Ngx Slider reCAPTCHA Demo](https://stackblitz.com/edit/ngx-slider-recaptcha-demo)
     - [Ngx Slider reCAPTCHA Custom Demo](https://stackblitz.com/edit/ngx-slider-recaptcha-custom-demo)
@@ -29,6 +31,8 @@ Ngx Slider reCAPTCHA is a customizable Angular library that provides a slider-ba
 - [Customization](#customization)
   - [Custom Image Retrieval](#custom-image-retrieval)
   - [Custom Verification](#custom-verification)
+- [Disable](#disable)
+- [Template Rendering](#template-rendering)
 - [Contributors](#contributors) 
 - [Acknowledgements](#acknowledgements)
 - [License](#license)
@@ -44,6 +48,10 @@ Ngx Slider reCAPTCHA is a customizable Angular library that provides a slider-ba
 ---
 
 ## Demo
+
+### GitHub Pages Demo
+- [Ngx Slider reCAPTCHA Custom Demo](https://mrzinkowin.github.io/ngx-slider-recaptcha)
+
 ### StackBlitz Demo
 - [Ngx Slider reCAPTCHA Demo](https://stackblitz.com/edit/ngx-slider-recaptcha-demo)
 - [Ngx Slider reCAPTCHA Custom Demo](https://stackblitz.com/edit/ngx-slider-recaptcha-custom-demo)
@@ -60,27 +68,49 @@ npm install ngx-slider-recaptcha --save
 
 ## Usage
 
-To start using `NgxSliderRecaptcha`:
+To start using `NgxSliderRecaptcha`, follow these steps:
 
-1. **Import** `NgxSliderRecaptchaModule` in your app module and optionally configure it globally.
+### 1. Import `NgxSliderRecaptchaModule`
+
+You can import the `NgxSliderRecaptchaModule` into your app module or use it standalone in a component. Choose the method that best fits your needs.
+
+#### Option 1: Import in App Module
+
+In your app module, import the `NgxSliderRecaptchaModule` to use the slider component globally.
 
 ```typescript
 @NgModule({
   imports: [
-    NgxSliderRecaptchaModule
+    NgxSliderRecaptchaModule  // Import the module to use the component
   ]
 })
 export class AppModule {}
 ```
 
-2. **Add** `<ngx-slider-recaptcha></ngx-slider-recaptcha>` in your template:
+#### Option 2: Standalone Usage
+If you prefer using the component standalone, import NgxSliderRecaptchaModule directly into the component where you want to use the slider:
 
+```typescript
+@Component({
+  selector: 'app-your-component',
+  standalone: true,
+  imports: [NgxSliderRecaptchaModule],  // Import the module directly in the component
+  templateUrl: './your-component.component.html',
+  styleUrls: ['./your-component.component.css']
+})
+export class YourComponent {
+  // Your component logic here
+}
+```
+
+### 2. Add the Slider Component in Your Template
+In your template, add the <ngx-slider-recaptcha> component where you want the slider to appear. Make sure to handle the verification event.
 ```html
 <ngx-slider-recaptcha (onVerified)="onVerified($event)"></ngx-slider-recaptcha>
 ```
 
-3. **Handle** the verification event in your component:
-
+### 3. Handle the Verification Event
+Define the onVerified method in your component to handle the result of the verification. You’ll receive an event object containing a success flag to indicate whether the verification was successful.
 ```typescript
 export class AppComponent {
   onVerified(event: VerificationResponse): void {
@@ -93,9 +123,9 @@ export class AppComponent {
 }
 ```
 
-4. **Update** angular.json for default slider images:
+### 4. Configure Default Slider Images (Optional)
   
-If you want to use the default slider images, add the following to your angular.json file under the assets section:
+If you want to use the default slider images, update the angular.json file by adding the following under the assets section:
 ```json
 {
   "glob": "**/*",
@@ -493,6 +523,72 @@ export class CustomNgxSliderRecaptchaVerificationService implements NgxSliderRec
 export class AppModule {}
 ```
 ---
+
+### Disable
+
+The `ngx-slider-recaptcha` component supports disabling the slider both globally and at the instance level. This allows you to conditionally control slider activation based on your application’s requirements.
+
+#### Global Disable
+To disable the slider globally across your application, configure the `disabled` property in the global configuration during module import:
+
+```typescript
+@NgModule({
+  imports: [
+    NgxSliderRecaptchaModule.forRoot({
+      config: {
+        disabled: true // Disables all sliders by default
+      }
+    })
+  ]
+})
+export class AppModule {}
+```
+
+#### Instance  Disable
+You can override the global disabled setting for specific slider instances by using the disabled property in the component’s template. This provides finer control over individual sliders:
+
+```html
+<!-- Disable the slider instance -->
+<ngx-slider-recaptcha
+  [disabled]="true"
+  (onVerified)="onVerified($event)">
+</ngx-slider-recaptcha>
+
+<!-- Enable the slider instance (overrides global disabled=true) -->
+<ngx-slider-recaptcha
+  [disabled]="false"
+  (onVerified)="onVerified($event)">
+</ngx-slider-recaptcha>
+```
+
+#### Precedence
+- If the global disabled setting is true, all sliders are disabled unless explicitly enabled at the instance level.
+- Instance-level disabled settings take precedence over the global configuration.
+
+---
+
+### Template Rendering
+
+The `ngx-slider-recaptcha` component supports custom template rendering for the slider icon, allowing you to replace the default slider handle design with your own custom implementation.
+
+#### Custom Slider Icon
+
+You can provide a custom template for the slider icon using the `<ng-template>` directive. Use the `sliderRender` property to bind your template.
+
+#### Example
+
+```html
+<ngx-slider-recaptcha [sliderRender]="customSliderIcon">
+  
+  <ng-template #customSliderIcon>
+    <i class="fa fa-arrow-right"></i>
+  </ng-template>
+
+</ngx-slider-recaptcha>
+```
+
+---
+
 
 ### Summary
 

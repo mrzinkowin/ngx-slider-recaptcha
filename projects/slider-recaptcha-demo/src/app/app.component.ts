@@ -7,13 +7,14 @@ import { FormsModule } from '@angular/forms';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
+import { NzNotificationModule, NzNotificationService } from 'ng-zorro-antd/notification';
 
 @Component({
   standalone: true,
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [CommonModule, FormsModule, NzFormModule, NzInputModule, NzCheckboxModule, NzButtonModule, NgxSliderRecaptchaModule,NzDividerModule]
+  imports: [CommonModule, FormsModule, NzFormModule, NzInputModule, NzCheckboxModule, NzButtonModule, NgxSliderRecaptchaModule, NzDividerModule, NzNotificationModule]
 })
 export class AppComponent implements OnInit {
   title = 'slider-recaptcha-demo';
@@ -21,6 +22,10 @@ export class AppComponent implements OnInit {
   disabled: boolean = false;
 
   @ViewChild('sliderRecaptchaRef', { static: false }) sliderRecaptcha!: NgxSliderRecaptchaComponent;
+
+  constructor(
+    private notification: NzNotificationService
+  ) { }
 
   ngOnInit(): void {
     this.config = { ...DEFAULT_SLIDER_RECAPTCHA_CONFIG };
@@ -38,13 +43,21 @@ export class AppComponent implements OnInit {
     alert("Refreshed the slider recaptcha")
   }
 
+  reset(): void {
+    this.config = { ...DEFAULT_SLIDER_RECAPTCHA_CONFIG };
+    this.notification.info(
+      'Action Required',
+      'The configuration has been reset. Please reset the ngx-slider-recaptcha to complete the process.',
+      {
+        nzPlacement: 'top'
+      });
+  }
+
   onChanged(): void {
     this.config = { ...this.config };
-    console.log('asd');
   }
 
   onChangedSize(): void {
-    console.log('onChangedSize', this.config.width);
     this.config = { ...this.config };
     this.sliderRecaptcha.reset();
   }

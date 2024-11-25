@@ -2,9 +2,13 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  width: var(--recaptcha-container-width);
+  height: var(--recaptcha-container-height);
 }
 
 .canvas {
+  width: var(--recaptcha-canvas-width);
+  height: var(--recaptcha-canvas-height);
   border: 1px solid #ccc;
   border-radius: 3px;
 }
@@ -28,9 +32,9 @@
   box-shadow: inset 0 0px 5px rgba(0, 0, 0, 0.15);
 
   .slider-text {
-      position: relative;
-      color: var(--recaptcha-text-color);
-      white-space: nowrap;
+    position: relative;
+    color: var(--recaptcha-text-color);
+    white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     padding-left: calc(var(--recaptcha-slider-container-height) + 10px);
@@ -38,26 +42,26 @@
   }
 
   .slider-mask {
-      position: absolute;
-      left: 0;
-      top: 0;
-      height: var(--recaptcha-slider-container-height);
-      width: var(--recaptcha-slider-container-height);
-      border: 1px solid transparent;
-      border-right: 0;
-      transform: translate(-1px, -1px);
-      border-radius: calc(var(--recaptcha-common-border-radius) - 1px);
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: var(--recaptcha-slider-container-height);
+    width: var(--recaptcha-slider-container-height);
+    border: 1px solid transparent;
+    border-right: 0;
+    transform: translate(-1px, -1px);
+    border-radius: calc(var(--recaptcha-common-border-radius) - 1px);
   }
 
   .slider-icon:before {
-      content: "\2794";
+    content: "\2794";
   }
 
 
   &.active .slider-text,
   &.success .slider-text,
   &.fail .slider-text {
-      display: none;
+    display: none;
   }
 }
 
@@ -79,62 +83,62 @@
   justify-content: center;
 
   &:hover {
-      background: var(--recaptcha-primary-color);
+    background: var(--recaptcha-primary-color);
 
-      .slider-icon {
-          background-position: 0 -13px;
-          color: #fff;
-      }
+    .slider-icon {
+      background-position: 0 -13px;
+      color: #fff;
+    }
   }
 }
 
 .active {
   .slider {
-      top: -1px;
-      border: 1px solid var(--recaptcha-primary-color);
-      background-color: var(--recaptcha-primary-color);
-      color: #fff;
+    top: -1px;
+    border: 1px solid var(--recaptcha-primary-color);
+    background-color: var(--recaptcha-primary-color);
+    color: #fff;
   }
 
   .slider-mask {
-      border-color: var(--recaptcha-primary-color);
-      background: var(--recaptcha-slider-mask-primary-color);
+    border-color: var(--recaptcha-primary-color);
+    background: var(--recaptcha-slider-mask-primary-color);
   }
 }
 
 .success {
   .slider {
-      top: -1px;
-      border: 1px solid var(--recaptcha-success-color);
-      background-color: var(--recaptcha-success-color);
-      color: #fff;
+    top: -1px;
+    border: 1px solid var(--recaptcha-success-color);
+    background-color: var(--recaptcha-success-color);
+    color: #fff;
   }
 
   .slider-mask {
-      border-color: var(--recaptcha-success-color);
-      background-color: #d2f4ef;
+    border-color: var(--recaptcha-success-color);
+    background-color: #d2f4ef;
   }
 
   .slider-icon:before {
-      content: "\2713";
+    content: "\2713";
   }
 }
 
 .fail {
   .slider {
-      top: -1px;
-      border: 1px solid var(--recaptcha-error-color);
-      background-color: var(--recaptcha-error-color);
-      color: #fff;
+    top: -1px;
+    border: 1px solid var(--recaptcha-error-color);
+    background-color: var(--recaptcha-error-color);
+    color: #fff;
   }
 
   .slider-mask {
-      border-color: var(--recaptcha-error-color);
-      background-color: var(--recaptcha-slider-mask-error-color);
+    border-color: var(--recaptcha-error-color);
+    background-color: var(--recaptcha-slider-mask-error-color);
   }
 
   .slider-icon:before {
-      content: "\2715";
+    content: "\2715";
   }
 }
 
@@ -162,5 +166,7 @@
   position: absolute;
   cursor: not-allowed;
   z-index: 9999;
+  width: var(--recaptcha-container-width);
+  height: var(--recaptcha-container-height);
   background-color: rgba(225, 225, 225, 0.3);
 }

@@ -1,9 +1,8 @@
 import { enableProdMode, importProvidersFrom } from '@angular/core';
-
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { environment } from './environments/environment';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
-import { CustomSliderRecaptchaImageService } from './app/config/custom-slider-image-service';
 import { NgxSliderRecaptchaModule } from '@ngx-slider-recaptcha';
 
 if (environment.production) {
@@ -12,11 +11,10 @@ if (environment.production) {
 
 bootstrapApplication(AppComponent, {
   providers: [
+    provideAnimations(),
     importProvidersFrom(
       [
-        NgxSliderRecaptchaModule.forRoot({
-          imageRetrievalService: CustomSliderRecaptchaImageService
-        })
+        NgxSliderRecaptchaModule
       ]
     )
   ]

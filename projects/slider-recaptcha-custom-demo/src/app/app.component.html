@@ -1,12 +1,13 @@
 <div class="main-wrapper">
     <div style="width: 500px;display: block;text-align: center;">
         <ngx-slider-recaptcha #sliderRecaptchaRef [config]="config" [disabled]="disabled"
-        (onVerified)="onVerified($event)" (onError)="onError($event)" [sliderRender]="customSliderIcon"
-        (onRefresh)="onRefresh()"></ngx-slider-recaptcha>
+            [sliderRender]="customSliderIcon" (onVerified)="onVerified($event)" (onError)="onError($event)"
+            (onRefresh)="onRefresh()">
+            <ng-template #customSliderIcon>
+                <i class="fa fa-arrow-right"></i>
+            </ng-template>
+        </ngx-slider-recaptcha>
     </div>
-    <ng-template #customSliderIcon>
-        <i class="fa fa-arrow-right"></i>
-    </ng-template>
     <nz-divider></nz-divider>
     <div class="row">
 
@@ -19,7 +20,7 @@
                             <nz-input-group>
                                 <input class="color-picker" name="primaryColor" [(ngModel)]="config.primaryColor"
                                     nz-input type="color" placeholder="Primary color" (input)="onChanged()" />
-                                    <span>{{config.primaryColor}}</span>
+                                <span>{{config.primaryColor}}</span>
                             </nz-input-group>
                         </nz-form-control>
                     </nz-form-item>
@@ -32,6 +33,7 @@
                             <nz-input-group>
                                 <input class="color-picker" name="errorColor" [(ngModel)]="config.errorColor" nz-input
                                     type="color" placeholder="Error color" (input)="onChanged()" />
+                                <span>{{config.errorColor}}</span>
                             </nz-input-group>
                         </nz-form-control>
                     </nz-form-item>
@@ -44,6 +46,7 @@
                             <nz-input-group>
                                 <input class="color-picker" name="successColor" [(ngModel)]="config.successColor"
                                     nz-input type="color" placeholder="Success color" (input)="onChanged()" />
+                                <span>{{config.errorColor}}</span>
                             </nz-input-group>
                         </nz-form-control>
                     </nz-form-item>
@@ -56,6 +59,7 @@
                             <nz-input-group>
                                 <input class="color-picker" name="textColor" [(ngModel)]="config.textColor" nz-input
                                     type="color" placeholder="Text color" (input)="onChanged()" />
+                                <span>{{config.textColor}}</span>
                             </nz-input-group>
                         </nz-form-control>
                     </nz-form-item>
@@ -70,6 +74,7 @@
                                 <input class="color-picker" name="sliderContainerBackgroundColor"
                                     [(ngModel)]="config.sliderContainerBackgroundColor" nz-input type="color"
                                     placeholder="Background color" (input)="onChanged()" />
+                                <span>{{config.sliderContainerBackgroundColor}}</span>
                             </nz-input-group>
                         </nz-form-control>
                     </nz-form-item>
@@ -83,6 +88,7 @@
                                 <input class="color-picker" name="sliderContainerBorderColor"
                                     [(ngModel)]="config.sliderContainerBorderColor" nz-input type="color"
                                     placeholder="Border color" (input)="onChanged()" />
+                                <span>{{config.sliderContainerBorderColor}}</span>
                             </nz-input-group>
                         </nz-form-control>
                     </nz-form-item>
@@ -230,9 +236,12 @@
                     </nz-form-item>
                 </div>
             </div>
+            <button nz-button style="margin-right: 15px;" nzType="primary" nzShape="round" (click)="reset()">
+                <span nz-icon nzType="download">Reset Config</span>
+            </button>
             <button nz-button style="margin-right: 15px;" nzType="primary" nzShape="round"
                 (click)="sliderRecaptcha.reset()">
-                <span nz-icon nzType="download">Reset</span>
+                <span nz-icon nzType="download">Reset Ngx Slider Recaptcha</span>
             </button>
         </form>
     </div>
