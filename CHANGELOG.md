@@ -2,10 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## [1.0.3-beta](https://github.com/mrzinkowin/ngx-slider-recaptcha/releases/tag/v1.0.3-beta) - 2024-11-25
+## [1.1.0-beta](https://github.com/mrzinkowin/ngx-slider-recaptcha/releases/tag/v1.1.0-beta) - 2024-11-25
 
 ### Fixed
-- Resolved canvas rendering issues when the width and height were updated.
+- Fixed canvas rendering issues when the width and height were updated.
+- Fixed issue where the slider did not work correctly on mobile devices by properly handling touchend events to retrieve clientX and clientY.
 - Fixed slider container text bug.
 
 ### Enhancements
@@ -23,6 +24,8 @@ All notable changes to this project will be documented in this file.
 ### Configuration
 - Added `@ngx-slider-recaptcha` path alias to `tsconfig` for the source entry point.
 
+### Deployment
+- Deployed the custom demo application to GitHub Pages for easier access and sharing.
 
 ## [1.0.2](https://github.com/mrzinkowin/ngx-slider-recaptcha/releases/tag/v1.0.2) - 2024-11-12
 
