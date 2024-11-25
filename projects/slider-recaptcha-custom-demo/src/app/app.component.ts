@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { DEFAULT_SLIDER_RECAPTCHA_CONFIG, NgxSliderRecaptchaComponent, NgxSliderRecaptchaConfig, NgxSliderRecaptchaModule, VerificationResponse } from '@ngx-slider-recaptcha';
+import { DEFAULT_SLIDER_RECAPTCHA_CONFIG, NgxSliderRecaptchaComponent, NgxSliderRecaptchaConfig, VerificationResponse } from '@ngx-slider-recaptcha';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { CommonModule } from '@angular/common';
@@ -14,7 +14,7 @@ import { NzNotificationModule, NzNotificationService } from 'ng-zorro-antd/notif
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [CommonModule, FormsModule, NzFormModule, NzInputModule, NzCheckboxModule, NzButtonModule, NgxSliderRecaptchaModule, NzDividerModule, NzNotificationModule]
+  imports: [CommonModule, FormsModule, NzFormModule, NzInputModule, NzCheckboxModule, NzButtonModule, NzDividerModule, NzNotificationModule, NgxSliderRecaptchaComponent]
 })
 export class AppComponent implements OnInit {
   title = 'slider-recaptcha-demo';

@@ -175,8 +175,6 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
   private onDragEnd(event: MouseEvent | TouchEvent): void {
     if (this.isVerifying || !this._isSliderDragging) return;
     this._isSliderDragging = false;
-    console.log(event);
-    console.log((event as TouchEvent).touches);
     const { x } = this.extractEventCoordinates(event);
     if (x === this.dragStartX) return;
 
@@ -289,7 +287,7 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
   }
 
   private loadFallbackImage(): string {
-    return `images/ngx-slider-recaptcha-${Math.floor(Math.random() * 4)}.jpg`;
+    return `assets/images/ngx-slider-recaptcha-${Math.floor(Math.random() * 4)}.jpg`;
   }
 
   private drawPuzzlePieceShape(ctx: CanvasRenderingContext2D, operation: 'fill' | 'clip'): void {
