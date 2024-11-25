@@ -88,13 +88,13 @@ export class AppModule {}
 ```
 
 #### Option 2: Standalone Usage
-If you prefer using the component standalone, import NgxSliderRecaptchaModule directly into the component where you want to use the slider:
+If you prefer using the component standalone, import NgxSliderRecaptchaComponent directly into the component where you want to use the slider:
 
 ```typescript
 @Component({
   selector: 'app-your-component',
   standalone: true,
-  imports: [NgxSliderRecaptchaModule],  // Import the module directly in the component
+  imports: [NgxSliderRecaptchaComponent],
   templateUrl: './your-component.component.html',
   styleUrls: ['./your-component.component.css']
 })
