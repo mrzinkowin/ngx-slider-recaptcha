@@ -20,5 +20,5 @@
         <span class="slider-text" *ngIf="!isVerifying">{{ sliderText }}</span>
     </div>
     <i *ngIf="sliderConfig.allowRefresh" class="refresh-icon" (click)="refresh()"></i>
-    <div class="disable-wrapper" *ngIf="disabled || isVerifying" [style.width.px]="sliderConfig.width"  [style.height.px]="sliderConfig.height"></div>
+    <div class="disable-wrapper" *ngIf="isDisabled || isVerifying"></div>
 </div>

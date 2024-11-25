@@ -5,11 +5,12 @@ export const DEFAULT_SLIDER_RECAPTCHA_CONFIG: NgxSliderRecaptchaConfig = {
     height: 200,
     puzzleSize: 45,
     puzzleRadius: 10,
-    
+
     toleranceOffset: 5,
     maxRetryAttempts: 3,
     allowRefresh: false,
     allowResponsiveWidth: false,
+    disabled: false,
 
     primaryColor: '#0083c1',
     errorColor: '#c4161c',

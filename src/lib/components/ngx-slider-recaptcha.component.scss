@@ -166,5 +166,7 @@
   position: absolute;
   cursor: not-allowed;
   z-index: 9999;
+  width: var(--recaptcha-container-width);
+  height: var(--recaptcha-container-height);
   background-color: rgba(225, 225, 225, 0.3);
 }

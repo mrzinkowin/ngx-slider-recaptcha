@@ -7,6 +7,6 @@ import { NgxSliderRecaptchaImageService } from '../core/ngx-slider-recaptcha-ima
 })
 export class DefaultNgxSliderRecaptchaImageService implements NgxSliderRecaptchaImageService {
     getSliderImage(): Observable<string> {
-        return of(`assets/images/ngx-slider-recaptcha-${Math.floor(Math.random() * 4)}.jpg`);
+        return of(`assets/images/ngx-slider-recaptcha-${Math.floor(Math.random() * 5)}.jpg`);
     }
 }

@@ -24,8 +24,8 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
   @ViewChild('captchaContainer', { static: true }) private captchaContainer!: ElementRef<HTMLElement>;
   @ViewChild('slider', { static: true }) private slider!: ElementRef<HTMLElement>;
 
-  @Input() config: NgxSliderRecaptchaConfig = { ...DEFAULT_SLIDER_RECAPTCHA_CONFIG };
-  @Input() disabled: boolean = false;
+  @Input() config?: NgxSliderRecaptchaConfig;
+  @Input() disabled?: boolean = false;
   @Input() sliderRender?: string | TemplateRef<void>;
 
   @Output() onVerified = new EventEmitter<VerificationResponse>();
@@ -62,7 +62,7 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
   ) { }
 
   ngOnInit(): void {
-    this._sliderConfig = { ...this._sliderConfig, ...this.globalSliderConfig, ...this.config };
+    this._sliderConfig = { ...this._sliderConfig, ...this.globalSliderConfig, ...DEFAULT_SLIDER_RECAPTCHA_CONFIG };
   }
 
   ngAfterViewInit() {
@@ -132,6 +132,10 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
 
   get sliderConfig() {
     return this._sliderConfig;
+  }
+
+  get isDisabled() {
+    return this.disabled ?? this.sliderConfig.disabled ?? false;
   }
 
   @HostListener('document:mousedown', ['$event'])
