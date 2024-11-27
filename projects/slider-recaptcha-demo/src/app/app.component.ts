@@ -15,9 +15,9 @@ import { NzRadioModule } from 'ng-zorro-antd/radio';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [CommonModule, FormsModule, NzFormModule, NzInputModule, 
-    NzCheckboxModule, NzButtonModule, NzDividerModule, NzNotificationModule, 
-    NgxSliderRecaptchaComponent,NzRadioModule]
+  imports: [CommonModule, FormsModule, NzFormModule, NzInputModule,
+    NzCheckboxModule, NzButtonModule, NzDividerModule, NzNotificationModule,
+    NgxSliderRecaptchaComponent, NzRadioModule]
 })
 export class AppComponent implements OnInit {
   title = 'slider-recaptcha-demo';
@@ -25,9 +25,10 @@ export class AppComponent implements OnInit {
   disabled: boolean = false;
 
   responsiveConfig!: NgxSliderRecaptchaConfig;
-  responsiveContainerWidth: string = '600px';
-  
+  responsiveContainerWidth: number = 600;
+
   @ViewChild('sliderRecaptchaRef', { static: false }) sliderRecaptcha!: NgxSliderRecaptchaComponent;
+  @ViewChild('responsiveSliderRecaptchaRef', { static: false }) responsiveSliderRecaptcha!: NgxSliderRecaptchaComponent;
 
   constructor(
     private notification: NzNotificationService
@@ -35,7 +36,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.config = { ...DEFAULT_SLIDER_RECAPTCHA_CONFIG };
-    this.responsiveConfig = { ...DEFAULT_SLIDER_RECAPTCHA_CONFIG,allowResponsiveWidth: true };
+    this.responsiveConfig = { ...DEFAULT_SLIDER_RECAPTCHA_CONFIG };
   }
 
   onVerified(response: VerificationResponse): void {
@@ -66,6 +67,11 @@ export class AppComponent implements OnInit {
 
   onChangedSize(): void {
     this.config = { ...this.config };
-    this.sliderRecaptcha.reset();
+    this.sliderRecaptcha?.reset();
+  }
+
+  onChangedResponsiveWidthSize(): void {
+    this.responsiveConfig = { ...this.responsiveConfig };
+    this.responsiveSliderRecaptcha?.reset();
   }
 }

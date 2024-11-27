@@ -1,5 +1,5 @@
 <div class="body-wrapper">
-    <div class="main-wrapper">
+    <div class="main-wrapper" *ngIf="false">
         <h4 style="width: 100%;">Demo Playground</h4>
         <br>
         <div style="width: auto;display: block;text-align: center;">
@@ -7,6 +7,7 @@
                 (onVerified)="onVerified($event)" (onError)="onError($event)"
                 (onRefresh)="onRefresh()"></ngx-slider-recaptcha>
         </div>
+
         <nz-divider></nz-divider>
 
         <form nz-form nzLayout="vertical">
@@ -215,16 +216,6 @@
                         </nz-form-control>
                     </nz-form-item>
                 </div>
-                <!-- <div class="check-form-gp-md">
-                    <nz-form-item>
-                        <nz-form-label nzFor="allowResponsiveWidth">Allow Responsive Width</nz-form-label>
-                        <nz-form-control>
-                            <label nz-checkbox name="allowResponsiveWidth" [(ngModel)]="config.allowResponsiveWidth"
-                                (ngModelChange)="onChangedSize()">{{ config.allowResponsiveWidth ? 'Yes' :
-                                'No'}}</label>
-                        </nz-form-control>
-                    </nz-form-item>
-                </div> -->
 
                 <div class="check-form-gp-lg">
                     <nz-form-item>
@@ -249,15 +240,16 @@
     </div>
 
     <div class="main-wrapper">
-        <h4 style="width: 100%;">Responsive Demo Playground</h4>
+        <h4 style="width: 100%;">Responsive Width Demo Playground</h4>
         <br>
-        <div class="responsive-container" [style.width]="responsiveContainerWidth">
-            <ngx-slider-recaptcha [config]="responsiveConfig"></ngx-slider-recaptcha>
+        <div class="responsive-container" [style.width.px]="responsiveContainerWidth">
+            <ngx-slider-recaptcha #responsiveSliderRecaptchaRef [config]="responsiveConfig" (onVerified)="onVerified($event)" (onError)="onError($event)"
+            (onRefresh)="onRefresh()"></ngx-slider-recaptcha>
         </div>
-        <p style="margin-top: 10px;"><i>Parent container width : {{responsiveContainerWidth}}</i></p>
+        <p style="margin-top: 10px;"><i>Parent container width : {{responsiveContainerWidth}}px</i></p>
 
         <nz-divider></nz-divider>
-        <p style="opacity: 0.7;"><i>(Note: The captcha has a width of 300px. When responsive mode is enabled, the captcha will adjust to fill the parent container.)</i></p>
+        <p style="opacity: 0.7;"><i>(Note: The captcha has a width of 300px. When responsive width mode is enabled, the captcha will adjust to fill the parent container.)</i></p>
         <div style="width: 100%;">
             <form nz-form nzLayout="vertical">
                 <div class="row">
@@ -265,13 +257,12 @@
                         <nz-form-item>
                             <nz-form-label nzFor="primaryColor">Primary Color</nz-form-label>
                             <nz-form-control nzErrorTip="Please input primary color">
-                                <nz-radio-group [(ngModel)]="responsiveContainerWidth" name="responsiveContainerWidth"
-                                    nzButtonStyle="solid">
-                                    <label nz-radio-button nzValue="200px">200px</label>
-                                    <label nz-radio-button nzValue="300px">300px</label>
-                                    <label nz-radio-button nzValue="400px">400px</label>
-                                    <label nz-radio-button nzValue="500px">500px</label>
-                                    <label nz-radio-button nzValue="600px">600px</label>
+                                <nz-radio-group  name="responsiveContainerWidth" nzButtonStyle="solid" [(ngModel)]="responsiveContainerWidth" (ngModelChange)="onChangedResponsiveWidthSize()">
+                                    <label nz-radio-button nzValue=200>200px</label>
+                                    <label nz-radio-button nzValue=300>300px</label>
+                                    <label nz-radio-button nzValue=400>400px</label>
+                                    <label nz-radio-button nzValue=500>500px</label>
+                                    <label nz-radio-button nzValue=600>600px</label>
                                 </nz-radio-group>
                             </nz-form-control>
                         </nz-form-item>
@@ -280,18 +271,10 @@
                         <nz-form-item>
                             <nz-form-label nzFor="allowResponsiveWidth">Allow Responsive Width</nz-form-label>
                             <nz-form-control>
-                                <label nz-checkbox name="allowResponsiveWidth">Yes</label>
+                                <label nz-checkbox name="allowResponsiveWidth" [(ngModel)]="responsiveConfig.allowResponsiveWidth" (ngModelChange)="onChangedResponsiveWidthSize()">Yes</label>
                             </nz-form-control>
                         </nz-form-item>
                     </div>
-                </div>
-                <div class="btn-group">
-                    <button nz-button nzType="primary" nzShape="round" (click)="reset()">
-                        <span nz-icon nzType="download">Reset Config</span>
-                    </button>
-                    <button nz-button nzType="primary" nzShape="round" (click)="sliderRecaptcha.reset()">
-                        <span nz-icon nzType="download">Reset Ngx Slider Recaptcha</span>
-                    </button>
                 </div>
             </form>
         </div>
