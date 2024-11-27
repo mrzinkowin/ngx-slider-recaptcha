@@ -26,6 +26,9 @@ export class AppComponent implements OnInit {
 
   responsiveConfig!: NgxSliderRecaptchaConfig;
   responsiveContainerWidth: number = 600;
+  responsiveDisabled: boolean = false;
+
+  playgroundType: 'demo' | 'responsive-width-demo' = 'demo';
 
   @ViewChild('sliderRecaptchaRef', { static: false }) sliderRecaptcha!: NgxSliderRecaptchaComponent;
   @ViewChild('responsiveSliderRecaptchaRef', { static: false }) responsiveSliderRecaptcha!: NgxSliderRecaptchaComponent;
@@ -70,7 +73,11 @@ export class AppComponent implements OnInit {
     this.sliderRecaptcha?.reset();
   }
 
-  onChangedResponsiveWidthSize(): void {
+  onResponsiveWidthChanged(): void {
+    this.responsiveConfig = { ...this.responsiveConfig };
+  }
+
+  onResponsiveWidthChangedSize(): void {
     this.responsiveConfig = { ...this.responsiveConfig };
     this.responsiveSliderRecaptcha?.reset();
   }
