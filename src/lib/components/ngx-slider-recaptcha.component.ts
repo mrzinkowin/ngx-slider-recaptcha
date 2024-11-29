@@ -26,7 +26,10 @@ export class NgxSliderRecaptchaComponent implements OnInit, OnChanges, AfterView
 
   @Input() config?: NgxSliderRecaptchaConfig;
   @Input() disabled?: boolean = false;
-  @Input() sliderRender?: string | TemplateRef<void>;
+  @Input() sliderContent?: string | TemplateRef<void>;
+  @Input() successContent?: string | TemplateRef<void>;
+  @Input() failContent?: string | TemplateRef<void>;
+
 
   @Output() onVerified = new EventEmitter<VerificationResponse>();
   @Output() onRefresh = new EventEmitter();

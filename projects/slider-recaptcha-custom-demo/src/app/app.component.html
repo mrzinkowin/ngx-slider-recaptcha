@@ -1,10 +1,19 @@
 <div class="main-wrapper">
     <div style="width: 500px;display: block;text-align: center;">
         <ngx-slider-recaptcha #sliderRecaptchaRef [config]="config" [disabled]="disabled"
-            [sliderRender]="customSliderIcon" (onVerified)="onVerified($event)" (onError)="onError($event)"
-            (onRefresh)="onRefresh()">
-            <ng-template #customSliderIcon>
+            [sliderContent]="sliderIcon" [successContent]="successIcon" [failContent]="failIcon" 
+            (onVerified)="onVerified($event)" (onError)="onError($event)" (onRefresh)="onRefresh()">
+
+            <ng-template #sliderIcon>
                 <i class="fa fa-arrow-right"></i>
+            </ng-template>
+
+            <ng-template #successIcon>
+                <i class="fa fa-check"></i>
+            </ng-template>
+
+            <ng-template #failIcon>
+                <i class="fa fa-close"></i>
             </ng-template>
         </ngx-slider-recaptcha>
     </div>
