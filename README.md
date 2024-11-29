@@ -573,17 +573,37 @@ The `ngx-slider-recaptcha` component supports custom template rendering for the 
 
 #### Custom Slider Icon
 
-You can provide a custom template for the slider icon using the `<ng-template>` directive. Use the `sliderRender` property to bind your template.
+You can provide a custom template for the slider icon, success icon, and fail icon using the `<ng-template>` directive. Use the `sliderContent`, `successContent`, and `failContent` properties to bind your templates for each respective state.
+
+This allows you to fully customize the look of the slider based on its current state—neutral (default), success, or failure.
+
+#### 🔔 Icon Container Width and Height Limitation
+
+The width and height of the icon container is limited to ensure a consistent design and layout. The container's width and height are tied to the puzzle's size. If you want to change the width and height of the icon container, you must also adjust the puzzle size accordingly. Changing the puzzle size will automatically change the icon container's width and height, ensuring that the layout remains consistent.
+
+Thus, while you can't arbitrarily change the icon container's width independently, adjusting the puzzle size will allow the icon container width and height to change proportionally.
+
+#### Properties:
+- **`sliderContent`**: Defines the content for the slider's neutral state (e.g., arrow or text).
+- **`successContent`**: Defines the content for the success state (e.g., check mark or text).
+- **`failContent`**: Defines the content for the fail state (e.g., cross or text).
 
 #### Example
 
 ```html
-<ngx-slider-recaptcha [sliderRender]="customSliderIcon">
+<ngx-slider-recaptcha [sliderContent]="sliderIcon" [successContent]="successIcon" [failContent]="failIcon" >
   
-  <ng-template #customSliderIcon>
+  <ng-template #sliderIcon>
     <i class="fa fa-arrow-right"></i>
   </ng-template>
 
+  <ng-template #successIcon>
+    <i class="fa fa-check"></i>
+  </ng-template>
+
+  <ng-template #failIcon>
+    <i class="fa fa-close"></i>
+  </ng-template>
 </ngx-slider-recaptcha>
 ```
 
