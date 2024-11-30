@@ -1,6 +1,6 @@
 <div class="body-wrapper">
     <div class="main-wrapper">
-        <form nz-form nzLayout="vertical">
+        <form nz-form nzLayout="vertical" style="width: 100%;">
             <nz-form-item>
                 <nz-form-label nzFor="primaryColor">Playground Type</nz-form-label>
                 <nz-form-control nzErrorTip="Please input primary color">
@@ -11,6 +11,8 @@
                 </nz-form-control>
             </nz-form-item>
         </form>
+
+        <nz-divider></nz-divider>
 
         <ng-container *ngIf="playgroundType === 'demo'">
             <h4 style="width: 100%;">Demo Playground</h4>
@@ -90,11 +92,11 @@
                         </nz-form-item>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="color-picker-form-gp-lg">
                         <nz-form-item>
-                            <nz-form-label nzFor="sliderContainerBackgroundColor">Slider Container Background
-                                Color</nz-form-label>
+                            <nz-form-label nzFor="sliderContainerBackgroundColor">Slider Container Background Color</nz-form-label>
                             <nz-form-control nzErrorTip="Please input slider container background color">
                                 <nz-input-group>
                                     <input class="color-picker" name="sliderContainerBackgroundColor"
@@ -108,8 +110,7 @@
 
                     <div class="color-picker-form-gp-lg">
                         <nz-form-item>
-                            <nz-form-label nzFor="sliderContainerBorderColor">Slider Container Border
-                                Color</nz-form-label>
+                            <nz-form-label nzFor="sliderContainerBorderColor">Slider Container Border Color</nz-form-label>
                             <nz-form-control nzErrorTip="Please input slider container border color">
                                 <nz-input-group>
                                     <input class="color-picker" name="sliderContainerBorderColor"
@@ -123,30 +124,42 @@
                 </div>
 
                 <div class="row">
-                    <div class="text-form-gp">
+                    <div class="col-12 col-sm-12 col-md-7 col-lg-6">
                         <nz-form-item>
                             <nz-form-label nzFor="width">Width</nz-form-label>
-                            <nz-form-control nzErrorTip="Please input width">
-                                <nz-input-group>
-                                    <input name="width" [(ngModel)]="config.width" nz-input type="number"
-                                        placeholder="Width" (input)="onChangedSize()" />
-                                </nz-input-group>
+                            <nz-form-control nzErrorTip="Please select width">
+                                <nz-radio-group name="width" nzButtonStyle="solid"
+                                    [(ngModel)]="config.width"
+                                    (ngModelChange)="onChangedSize()">
+                                    <label nz-radio-button [nzValue]=200>200px</label>
+                                    <label nz-radio-button [nzValue]=300>300px</label>
+                                    <label nz-radio-button [nzValue]=400>400px</label>
+                                    <label nz-radio-button [nzValue]=500>500px</label>
+                                    <label nz-radio-button [nzValue]=600>600px</label>
+                                </nz-radio-group>
                             </nz-form-control>
                         </nz-form-item>
                     </div>
 
-                    <div class="text-form-gp">
+                    <div class="col-12 col-sm-12 col-md-7 col-lg-6">
                         <nz-form-item>
                             <nz-form-label nzFor="height">Height</nz-form-label>
-                            <nz-form-control nzErrorTip="Please input height">
-                                <nz-input-group>
-                                    <input name="height" [(ngModel)]="config.height" nz-input type="number"
-                                        placeholder="Height" (input)="onChangedSize()" />
-                                </nz-input-group>
+                            <nz-form-control nzErrorTip="Please select height">
+                                <nz-radio-group name="height" nzButtonStyle="solid"
+                                    [(ngModel)]="config.height"
+                                    (ngModelChange)="onChangedSize()">
+                                    <label nz-radio-button [nzValue]=200>200px</label>
+                                    <label nz-radio-button [nzValue]=300>300px</label>
+                                    <label nz-radio-button [nzValue]=400>400px</label>
+                                    <label nz-radio-button [nzValue]=500>500px</label>
+                                    <label nz-radio-button [nzValue]=600>600px</label>
+                                </nz-radio-group>
                             </nz-form-control>
                         </nz-form-item>
                     </div>
+                </div>
 
+                <div class="row">
                     <div class="text-form-gp">
                         <nz-form-item>
                             <nz-form-label nzFor="puzzleSize">Puzzle Size</nz-form-label>
@@ -207,6 +220,7 @@
                         </nz-form-item>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="text-form-gp-xl">
                         <nz-form-item>
@@ -232,6 +246,7 @@
                         </nz-form-item>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="check-form-gp">
                         <nz-form-item>
@@ -286,40 +301,58 @@
                     </ng-template>
                 </ngx-slider-recaptcha>
             </div>
+
             <p style="margin-top: 10px;"><i>Parent container width : {{responsiveContainerWidth}}px</i></p>
 
             <nz-divider></nz-divider>
-            <p style="opacity: 0.7;"><i>(Note: The captcha has a width of 300px. When responsive width mode is enabled,
-                    the
-                    captcha will adjust to fill the parent container.)</i></p>
+
+            <p style="opacity: 0.7;"><i>(Note: The captcha has a width of 300px. When responsive width mode is enabled, the captcha will adjust to fill the parent container.)</i></p>
             <div style="width: 100%;">
                 <form nz-form nzLayout="vertical">
                     <div class="row">
                         <div class="col-12 col-sm-12 col-md-7 col-lg-6">
                             <nz-form-item>
-                                <nz-form-label nzFor="primaryColor">Container Width</nz-form-label>
-                                <nz-form-control nzErrorTip="Please input primary color">
+                                <nz-form-label nzFor="responsiveContainerWidth">Container Width</nz-form-label>
+                                <nz-form-control nzErrorTip="Please select container width">
                                     <nz-radio-group name="responsiveContainerWidth" nzButtonStyle="solid"
                                         [(ngModel)]="responsiveContainerWidth"
                                         (ngModelChange)="onResponsiveWidthChangedSize()">
-                                        <label nz-radio-button nzValue=200>200px</label>
-                                        <label nz-radio-button nzValue=300>300px</label>
-                                        <label nz-radio-button nzValue=400>400px</label>
-                                        <label nz-radio-button nzValue=500>500px</label>
-                                        <label nz-radio-button nzValue=600>600px</label>
+                                        <label nz-radio-button [nzValue]=200>200px</label>
+                                        <label nz-radio-button [nzValue]=300>300px</label>
+                                        <label nz-radio-button [nzValue]=400>400px</label>
+                                        <label nz-radio-button [nzValue]=500>500px</label>
+                                        <label nz-radio-button [nzValue]=600>600px</label>
                                     </nz-radio-group>
                                 </nz-form-control>
                             </nz-form-item>
                         </div>
-                        <div class="col-5">
+
+                        <div class="col-12 col-sm-12 col-md-7 col-lg-6">
+                            <nz-form-item>
+                                <nz-form-label nzFor="responsiveContainerHeight">Container Height</nz-form-label>
+                                <nz-form-control nzErrorTip="Please select container height">
+                                    <nz-radio-group name="responsiveContainerHeight" nzButtonStyle="solid"
+                                        [(ngModel)]="responsiveConfig.height"
+                                        (ngModelChange)="onResponsiveWidthChangedSize()">
+                                        <label nz-radio-button [nzValue]=200>200px</label>
+                                        <label nz-radio-button [nzValue]=300>300px</label>
+                                        <label nz-radio-button [nzValue]=400>400px</label>
+                                        <label nz-radio-button [nzValue]=500>500px</label>
+                                        <label nz-radio-button [nzValue]=600>600px</label>
+                                    </nz-radio-group>
+                                </nz-form-control>
+                            </nz-form-item>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="check-form-gp-lg">
                             <nz-form-item>
                                 <nz-form-label nzFor="allowResponsiveWidth">Allow Responsive Width</nz-form-label>
                                 <nz-form-control>
-                                    <label nz-checkbox name="allowResponsiveWidth"
-                                        [(ngModel)]="responsiveConfig.allowResponsiveWidth"
-                                        (ngModelChange)="onResponsiveWidthChangedSize()">{{
-                                        responsiveConfig.allowResponsiveWidth ? 'Yes' :
-                                        'No'}}</label>
+                                    <label nz-checkbox name="allowResponsiveWidth" [(ngModel)]="responsiveConfig.allowResponsiveWidth" (ngModelChange)="onResponsiveWidthChangedSize()">
+                                        {{ responsiveConfig.allowResponsiveWidth ? 'Yes' : 'No'}}
+                                    </label>
                                 </nz-form-control>
                             </nz-form-item>
                         </div>
