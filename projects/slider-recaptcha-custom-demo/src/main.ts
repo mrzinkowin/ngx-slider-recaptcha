@@ -4,6 +4,7 @@ import { environment } from './environments/environment';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 import { NgxSliderRecaptchaModule } from '@ngx-slider-recaptcha';
+import { CustomSliderRecaptchaImageService } from './app/config/custom-slider-image-service';
 
 if (environment.production) {
   enableProdMode();
@@ -14,7 +15,11 @@ bootstrapApplication(AppComponent, {
     provideAnimations(),
     importProvidersFrom(
       [
-        NgxSliderRecaptchaModule
+        NgxSliderRecaptchaModule.forRoot(
+          {
+            imageRetrievalService: CustomSliderRecaptchaImageService
+          }
+        )
       ]
     )
   ]

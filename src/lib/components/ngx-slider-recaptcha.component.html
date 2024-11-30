@@ -1,17 +1,43 @@
 <div #captchaContainer class="captcha-container">
     <canvas #canvas class="canvas"></canvas>
     <canvas #block class="block" [style.left.px]="blockOffsetX"></canvas>
-    <div class="slider-container" [class.active]="isSliderDragging" [class.success]="verificationStatus === 'success'" [class.fail]="verificationStatus === 'fail'">
+    <div class="slider-container" [class.active]="isSliderDragging" [class.success]="verificationStatus === 'success'"
+        [class.fail]="verificationStatus === 'fail'">
         <div class="slider-mask" [style.width.px]="maskWidth">
             <div #slider class="slider" [style.left.px]="sliderOffsetX">
-                <ng-container *ngIf="sliderRender; else defaultTemplate">
-                    <ng-container *ngIf="isTemplate(sliderRender); else stringTemplate">
-                        <ng-container *ngTemplateOutlet="sliderRender"></ng-container>
+                <ng-container *ngIf="verificationStatus === 'none'">
+                    <ng-container *ngIf="sliderContent; else defaultTemplate">
+                        <ng-container *ngIf="isTemplate(sliderContent); else sliderContentStringTemplate">
+                            <ng-container *ngTemplateOutlet="sliderContent"></ng-container>
+                        </ng-container>
+                        <ng-template #sliderContentStringTemplate>
+                            {{ sliderContent }}
+                        </ng-template>
                     </ng-container>
-                    <ng-template #stringTemplate>
-                        {{ sliderRender }}
-                    </ng-template>
                 </ng-container>
+
+                <ng-container *ngIf="verificationStatus === 'success'">
+                    <ng-container *ngIf="successContent; else defaultTemplate">
+                        <ng-container *ngIf="isTemplate(successContent); else successContentStringTemplate">
+                            <ng-container *ngTemplateOutlet="successContent"></ng-container>
+                        </ng-container>
+                        <ng-template #successContentStringTemplate>
+                            {{ successContent }}
+                        </ng-template>
+                    </ng-container>
+                </ng-container>
+
+                <ng-container *ngIf="verificationStatus === 'fail'">
+                    <ng-container *ngIf="failContent; else defaultTemplate">
+                        <ng-container *ngIf="isTemplate(failContent); else failContentStringTemplate">
+                            <ng-container *ngTemplateOutlet="failContent"></ng-container>
+                        </ng-container>
+                        <ng-template #failContentStringTemplate>
+                            {{ sliderContent }}
+                        </ng-template>
+                    </ng-container>
+                </ng-container>
+
                 <ng-template #defaultTemplate>
                     <span class="slider-icon"></span>
                 </ng-template>

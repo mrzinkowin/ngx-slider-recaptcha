@@ -2,8 +2,6 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  width: var(--recaptcha-container-width);
-  height: var(--recaptcha-container-height);
 }
 
 .canvas {
@@ -26,6 +24,7 @@
   align-items: center;
   margin-top: 5px;
   height: var(--recaptcha-slider-container-height);
+  width: var(--recaptcha-canvas-width);
   border: 1px solid var(--recaptcha-container-border-color);
   background: var(--recaptcha-container-background-color);
   border-radius: var(--recaptcha-common-border-radius);
@@ -70,20 +69,24 @@
   top: 0;
   left: 0;
   width: var(--recaptcha-slider-container-height);
+  // height: calc(var(--recaptcha-slider-container-height) - 2px);
   height: var(--recaptcha-slider-container-height);
   max-width: var(--recaptcha-slider-container-height);
   max-height: var(--recaptcha-slider-container-height);
   background: #fff;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  transition: background 0.2s linear;
   border-radius: calc(var(--recaptcha-common-border-radius) - 1px);
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 1px solid #fff;
+  transform: translateY(-1px);
 
   &:hover {
     background: var(--recaptcha-primary-color);
+    color: #fff;
+    border: 1px solid var(--recaptcha-primary-color);;
 
     .slider-icon {
       background-position: 0 -13px;
@@ -98,6 +101,7 @@
     border: 1px solid var(--recaptcha-primary-color);
     background-color: var(--recaptcha-primary-color);
     color: #fff;
+    transform: translateY(0px);
   }
 
   .slider-mask {
@@ -112,6 +116,7 @@
     border: 1px solid var(--recaptcha-success-color);
     background-color: var(--recaptcha-success-color);
     color: #fff;
+    transform: translateY(0px);
   }
 
   .slider-mask {
@@ -130,6 +135,7 @@
     border: 1px solid var(--recaptcha-error-color);
     background-color: var(--recaptcha-error-color);
     color: #fff;
+    transform: translateY(0px);
   }
 
   .slider-mask {

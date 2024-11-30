@@ -1,29 +1,7 @@
 {
   "name": "ngx-slider-recaptcha",
-  "version": "1.1.0-beta",
+  "version": "1.1.0",
   "description": "Angular slider with reCAPTCHA verification",
-  "license": "MIT",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "start:demo": "ng serve slider-recaptcha-demo",
-    "start:custom-demo": "ng serve slider-recaptcha-custom-demo",
-    "build": "ng build",
-    "build:lib": "ng build ngx-slider-recaptcha",
-    "build:custom-demo": "ng build slider-recaptcha-custom-demo --base-href https://mrzinkowin.github.io/ngx-slider-recaptcha/",
-    "deploy:custom-demo": "npm run build:custom-demo && angular-cli-ghpages --dir=dist/slider-recaptcha-custom-demo",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "publish:lib": "npm run build:lib && cd dist/ngx-slider-recaptcha && npm publish --access public"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mrzinkowin/ngx-slider-recaptcha"
-  },
-  "author": {
-    "name": "Zin Ko Win",
-    "email": "zinkowin.developer@gmail.com"
-  },
   "keywords": [
     "angular",
     "angular-library",
@@ -41,12 +19,46 @@
     "angular-slider-captcha",
     "angular-slider-library"
   ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrzinkowin/ngx-slider-recaptcha"
+  },
   "bugs": {
     "url": "https://github.com/mrzinkowin/ngx-slider-recaptcha/issues"
   },
+  "author": {
+    "name": "Zin Ko Win",
+    "email": "zinkowin.developer@gmail.com"
+  },
+  "contributors": [
+    {
+      "name": "Zin Ko Win",
+      "email": "zinkowin.developer@gmail.com",
+      "url": "https://github.com/mrzinkowin"
+    },
+    {
+      "name": "Ko Ko Kyaw",
+      "email": "kokyaw264.mm@gmail.com",
+      "url": "https://github.com/KoKyaw-jolly"
+    }
+  ],
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "start:demo": "ng serve slider-recaptcha-demo",
+    "start:custom-demo": "ng serve slider-recaptcha-custom-demo",
+    "build": "ng build",
+    "build:lib": "ng build ngx-slider-recaptcha",
+    "build:custom-demo": "ng build slider-recaptcha-custom-demo --base-href https://mrzinkowin.github.io/ngx-slider-recaptcha/",
+    "deploy:custom-demo": "npm run build:custom-demo && angular-cli-ghpages --dir=dist/slider-recaptcha-custom-demo",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "publish:lib": "npm run build:lib && cd dist/ngx-slider-recaptcha && npm publish --access public"
+  },
   "peerDependencies": {
-    "@angular/common": "^14.0.0",
-    "@angular/core": "^14.0.0"
+    "@angular/common": ">=14.0.0",
+    "@angular/core": ">=14.0.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.1.3",
