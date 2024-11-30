@@ -16,6 +16,7 @@ Ngx Slider reCAPTCHA is a customizable Angular library that provides a slider-ba
 ## Table of Contents
 
 - [Features](#features)
+- [Versions](#versions)
 - [Demo](#demo)
   - [GitHub Pages Demo](#github-pages-demo)
     - [Ngx Slider reCAPTCHA Custom Demo](https://mrzinkowin.github.io/ngx-slider-recaptcha)
@@ -46,6 +47,21 @@ Ngx Slider reCAPTCHA is a customizable Angular library that provides a slider-ba
 - **Extensible**: Allows custom implementations for image retrieval and verification.
 
 ---
+
+## Versions
+
+This table provides details about the different versions of the library, indicating whether a version is deprecated (no longer supported) or stable for use.
+
+| Version | Deprecated | Stable |
+|---------|------------|--------|
+| v1.0.0  | ✅         | ❌     |
+| v1.0.1  | ✅         | ❌     |
+| v1.0.2  | ✅         | ❌     |
+| v1.1.0  | ❌         | ✅     |
+
+- **Deprecated**: Indicates whether the version is no longer supported.
+- **Stable**: Indicates whether the version is reliable and recommended for production use.
+
 
 ## Demo
 

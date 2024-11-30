@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0](https://github.com/mrzinkowin/ngx-slider-recaptcha/releases/tag/v1.1.0) - 2024-11-30
+
+### Features
+
+- Introduced  support for full customization of success and fail icons via user-provided templates, enabling greater flexibility.
+
+### Enhancements
+- Reduced the default slider image file sizes, minimizing the library's overall package size and improving download and load times for end users.
+- Improved support for sliderContent, successContent, and failContent, allowing seamless customization of all slider-related elements.
+
+### Fixed
+- Fixed a bug where importing NgxSliderRecaptchaModule in child modules caused conflicts with global configurations. This change ensures smoother module integration.
+- Fixed a bug where fail icons did not render correctly when custom templates were used. All icons now display reliably, fully supporting user-provided templates.
+
+### Documentation
+- Updated standalone usage examples to demonstrate using NgxSliderRecaptchaComponent instead of NgxSliderRecaptchaModule, simplifying implementation.
+- Added detailed examples illustrating how to customize slider icons, including tips on aligning puzzle size with icon dimensions for better visual consistency.
+
+---
+
 ## [1.1.0-beta](https://github.com/mrzinkowin/ngx-slider-recaptcha/releases/tag/v1.1.0-beta) - 2024-11-25
 
 ### Fixed
@@ -27,18 +47,22 @@ All notable changes to this project will be documented in this file.
 ### Deployment
 - Deployed the custom demo application to GitHub Pages for easier access and sharing.
 
+---
+
 ## [1.0.2](https://github.com/mrzinkowin/ngx-slider-recaptcha/releases/tag/v1.0.2) - 2024-11-12
 
 ### Fixed
 - Resolved issue where the refresh icon did not display when using the component in standalone mode due to missing import of `CommonModule`.
 
 ---
+
 ## [1.0.1](https://github.com/mrzinkowin/ngx-slider-recaptcha/releases/tag/v1.0.1) - 2024-11-12
 
 ### Fixed
 - Added missing styles to the library build to ensure consistent appearance across components.
 
 ---
+
 ## [1.0.0](https://github.com/mrzinkowin/ngx-slider-recaptcha/releases/tag/v1.0.0) - 2024-11-11
 
 ### Added

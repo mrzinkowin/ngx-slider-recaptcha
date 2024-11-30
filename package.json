@@ -1,6 +1,6 @@
 {
   "name": "ngx-slider-recaptcha",
-  "version": "1.1.0-beta",
+  "version": "1.1.0",
   "description": "Angular slider with reCAPTCHA verification",
   "keywords": [
     "angular",
